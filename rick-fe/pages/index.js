@@ -7,23 +7,23 @@ import { PageHeader, CharacterList } from '../src/components/organisms';
 const Home = () => (
   <>
     <Helmet
-      title="Hello there"
-      meta={[{ property: 'og:title', content: 'Hello there' }]}
+      title="Rick and Morty - Characters"
+      meta={[{ property: 'og:title', content: 'Rick and Morty - Characters' }]}
     />
-      <Grid
-        container
-        direction="column"
-        spacing={1}
-      >
-        <Grid item>
-          <PageHeader />
-        </Grid>
-        <Grid item>
-          <Container>
-            <CharacterList />
-          </Container>
-        </Grid>
+    <Grid
+      container
+      direction="column"
+      spacing={1}
+    >
+      <Grid item>
+        <PageHeader />
       </Grid>
+      <Grid item>
+        <Container>
+          <CharacterList />
+        </Container>
+      </Grid>
+    </Grid>
   </>
 );
 
