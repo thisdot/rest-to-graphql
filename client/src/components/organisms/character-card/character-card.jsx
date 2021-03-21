@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+
+import { Card } from '../../atoms';
 
 const CharacterAvatar = styled(Avatar)`
   width: 8rem;
@@ -12,16 +12,14 @@ const CharacterAvatar = styled(Avatar)`
 `;
 
 const CharacterCard = ({ character }) => (
-  <Card raised={true}>
-    <CardContent>
-      <CharacterAvatar src={character.image} alt={character.name} variant="rounded" />
-      <Link href={`/characters/${character.id}`}>
-        <Typography variant="h4">{character.name}</Typography>
-      </Link>
-      {character.status}
-      {character.species}
-      Last Known Location: {character.location.name}
-    </CardContent>
+  <Card>
+    <CharacterAvatar src={character.image} alt={character.name} variant="rounded" />
+    <Link href={`/characters/${character.id}`}>
+      <Typography variant="h4">{character.name}</Typography>
+    </Link>
+    {character.status}
+    {character.species}
+    Last Known Location: {character.location.name}
   </Card>
 );
 

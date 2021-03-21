@@ -1,4 +1,5 @@
 export { default as AppBar } from './app-bar';
+export { default as Card } from './card';
 export { default as Container } from './container';
 export { default as Link } from './link';
 export { default as Logo } from './logo';
