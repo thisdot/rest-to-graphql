@@ -10,7 +10,7 @@ const CharacterListData = () => {
   const [page, setPage] = useState(1);
   const { isLoading, error, data } = useQuery(
     ['charactersData', page],
-    () => getAll({ page }),
+    async () => getAll({ page }),
   );
   const changePage = (event, page) => setPage(page);
 

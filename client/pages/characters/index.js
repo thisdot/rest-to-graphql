@@ -21,7 +21,10 @@ export default Characters;
 export async function getServerSideProps(context) {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery('charactersData', getAll({ page: 1 }));
+  await queryClient.prefetchQuery(
+    ['charactersData', 1],
+    async () => getAll({ page: 1 })
+  );
 
   return {
     props: {

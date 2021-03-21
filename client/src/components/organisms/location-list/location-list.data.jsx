@@ -6,9 +6,12 @@ import { SimpleGrid } from '../../atoms';
 import { Pagination } from '../../molecules';
 import LocationListView from './location-list.view';
 
-const LocationListData = ({ initialData }) => {
+const LocationListData = () => {
   const [page, setPage] = useState(1);
-  const { isLoading, error, data } = useQuery(['locationsData', page], () => getAll({ page }), { initialData });
+  const { isLoading, error, data } = useQuery(
+    ['locationsData', page],
+    async () => getAll({ page }),
+  );
   const changePage = (event, page) => setPage(page);
 
   if (isLoading) return 'Loading...'
