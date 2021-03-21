@@ -1,5 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
+
 import { CharacterList } from '../../src/components/organisms';
 import { getAll } from '../../src/shared/api/character-api';
 
@@ -9,24 +12,20 @@ const Characters = ({ charactersData }) => (
       title="Rick and Morty - Characters"
       meta={[{ property: 'og:title', content: 'Rick and Morty - Characters' }]}
     />
-    <CharacterList initialData={charactersData} />
+    <CharacterList />
   </>
 );
 
 export default Characters;
 
 export async function getServerSideProps(context) {
-  const data = await getAll({ page: 1 });
+  const queryClient = new QueryClient();
 
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+  await queryClient.prefetchQuery('charactersData', getAll({ page: 1 }));
 
   return {
     props: {
-      charactersData: data,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 }

@@ -1,49 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import MAppBar from '@material-ui/core/AppBar';
-import MToolbar from '@material-ui/core/Toolbar';
-import MTypography from '@material-ui/core/Typography';
-import MLink from '@material-ui/core/Link';
-import { Logo } from '../../atoms';
+import { AppBar, Link, Logo, SimpleGrid, Typography } from '../../atoms';
 
-const AppBar = styled(MAppBar)`
-  background-color: #eee;
-`;
-
-const LogoContainer = styled(MLink)`
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-`;
-
-const PageTitle = styled(MTypography)`
+const PageTitle = styled(Typography)`
   color: #000;
-  margin-left: 1rem;
+  font-size: 1.75rem;
 `;
 
-const Navigation = styled.div`
+const Navigation = styled(SimpleGrid)`
   width: auto;
 `;
 
 const PageHeader = () => (
-  <AppBar position="static">
-    <MToolbar>
-      <LogoContainer href="/" color="inherit" underline="none">
-        <Logo />
-        <PageTitle display="inline">
-          Rick and Morty
-        </PageTitle>
-      </LogoContainer>
+  <AppBar>
+    <SimpleGrid alignItems="center" justify="space-between">
+      <Link href="/" underline="none">
+        <SimpleGrid alignItems="center">
+          <Logo />
+          <PageTitle>
+            Rick and Morty
+          </PageTitle>
+        </SimpleGrid>
+      </Link>
 
       <Navigation>
-        <MLink href="/characters">
+        <Link href="/characters">
           Characters
-        </MLink>
-        <MLink href="/locations">
+        </Link>
+        <Link href="/locations">
           Locations
-        </MLink>
+        </Link>
       </Navigation>
-    </MToolbar>
+    </SimpleGrid>
   </AppBar>
 );
 

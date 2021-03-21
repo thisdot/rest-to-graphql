@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query'
-import Grid from '@material-ui/core/Grid';
-import Pagination from '@material-ui/lab/Pagination';
+
 import { getAll } from '../../../shared/api/location-api';
+import { SimpleGrid } from '../../atoms';
+import { Pagination } from '../../molecules';
 import LocationListView from './location-list.view';
 
 const LocationListData = ({ initialData }) => {
@@ -15,20 +16,20 @@ const LocationListData = ({ initialData }) => {
   if (error) return 'Error occured! ' + error.message;
 
   return (
-    <Grid
-      container
+    <SimpleGrid
       direction="column"
       justify="center"
       alignItems="center"
-      spacing={1}
     >
-      <Grid item>
-        <Pagination disabled={isLoading} count={data.info.pages} page={page} onChange={changePage} size="large" />
-      </Grid>
-      <Grid item>
-        <LocationListView locations={data.results} />
-      </Grid>
-    </Grid>
+      <Pagination
+        disabled={isLoading}
+        totalPages={data.info.pages}
+        currentPage={page}
+        onChange={changePage}
+        size="lg"
+      />
+      <LocationListView locations={data.results} />
+    </SimpleGrid>
   );
 };
 

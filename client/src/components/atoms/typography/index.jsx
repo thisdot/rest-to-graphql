@@ -7,10 +7,10 @@ const VARIANTS = {
   'small': 'body2',
 }
 
-const Typography = ({ type, children }) => {
+const Typography = ({ className, color, type, children }) => {
   const variant = VARIANTS[type] || type;
   return (
-    <MTypography variant={variant}>
+    <MTypography className={className} color={color} variant={variant}>
       {children}
     </MTypography>
   );

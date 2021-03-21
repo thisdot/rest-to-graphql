@@ -1,5 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
+
 import { LocationList } from '../../src/components/organisms';
 import { getAll } from '../../src/shared/api/location-api';
 
@@ -16,17 +19,13 @@ const Locations = ({ locationsData }) => (
 export default Locations;
 
 export async function getServerSideProps(context) {
-  const data = await getAll({ page: 1 });
+  const queryClient = new QueryClient();
 
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+  await queryClient.prefetchQuery('locationsData', getAll({ page: 1 }));
 
   return {
     props: {
-      locationsData: data,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 }

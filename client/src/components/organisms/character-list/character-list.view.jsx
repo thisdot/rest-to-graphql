@@ -1,15 +1,13 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import { SimpleGrid } from '../../atoms';
 import CharacterCard from '../character-card';
 
 const CharacterList = ({ characters }) => (
-  <Grid container spacing={3}>
+  <SimpleGrid spacing={3} itemProps={{ xs: 12, md: 4 }}>
     {characters.map((character) => (
-      <Grid item xs={12} md={4} key={character.id} >
-        <CharacterCard character={character} />
-      </Grid>
+      <CharacterCard character={character} key={character.id} />
     ))}
-  </Grid>
+  </SimpleGrid>
 );
 
 export default CharacterList;
