@@ -13,11 +13,16 @@ const AppBar = styled(MAppBar)`
 const LogoContainer = styled(MLink)`
   display: flex;
   align-items: center;
+  flex-grow: 1;
 `;
 
 const PageTitle = styled(MTypography)`
   color: #000;
   margin-left: 1rem;
+`;
+
+const Navigation = styled.div`
+  width: auto;
 `;
 
 const PageHeader = () => (
@@ -29,6 +34,15 @@ const PageHeader = () => (
           Rick and Morty
         </PageTitle>
       </LogoContainer>
+
+      <Navigation>
+        <MLink href="/characters">
+          Characters
+        </MLink>
+        <MLink href="/locations">
+          Locations
+        </MLink>
+      </Navigation>
     </MToolbar>
   </AppBar>
 );

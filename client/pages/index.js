@@ -1,29 +1,23 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import { PageHeader, CharacterList } from '../src/components/organisms';
 
 const Home = () => (
   <>
     <Helmet
-      title="Rick and Morty - Characters"
+      title="Rick and Morty - Homepage"
       meta={[{ property: 'og:title', content: 'Rick and Morty - Characters' }]}
     />
-    <Grid
-      container
-      direction="column"
-      spacing={1}
-    >
-      <Grid item>
-        <PageHeader />
-      </Grid>
-      <Grid item>
-        <Container>
-          <CharacterList />
-        </Container>
-      </Grid>
-    </Grid>
+    <h1>Welcome to the Ricky and Morty REST to GraphQL Demo!</h1>
+    <p>
+      With API migrations, there are 2 paths:
+    </p>
+    <ol>
+      <li>Replace each API manually</li>
+      <li>Utilize your old REST API to shim your GraphQL API</li>
+    </ol>
+    <p>
+      We'll demonstrate the 2nd option as it's a more scalable solution to let you move more quickly!
+    </p>
   </>
 );
 

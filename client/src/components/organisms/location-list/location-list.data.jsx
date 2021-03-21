@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query'
 import Grid from '@material-ui/core/Grid';
 import Pagination from '@material-ui/lab/Pagination';
-import { getAll } from '../../../shared/api/character-api';
-import CharacterListView from './character-list.view';
+import { getAll } from '../../../shared/api/location-api';
+import LocationListView from './location-list.view';
 
-const CharacterListData = ({ initialData }) => {
+const LocationListData = ({ initialData }) => {
   const [page, setPage] = useState(1);
-  const { isLoading, error, data } = useQuery(['charactersData', page], () => getAll({ page }), { initialData });
+  const { isLoading, error, data } = useQuery(['locationsData', page], () => getAll({ page }), { initialData });
   const changePage = (event, page) => setPage(page);
 
   if (isLoading) return 'Loading...'
@@ -26,10 +26,10 @@ const CharacterListData = ({ initialData }) => {
         <Pagination disabled={isLoading} count={data.info.pages} page={page} onChange={changePage} size="large" />
       </Grid>
       <Grid item>
-        <CharacterListView characters={data.results} />
+        <LocationListView locations={data.results} />
       </Grid>
     </Grid>
   );
 };
 
-export default CharacterListData;
+export default LocationListData;

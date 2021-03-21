@@ -3,10 +3,13 @@ import { Helmet } from 'react-helmet';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { QueryClient, QueryClientProvider } from 'react-query'
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
+import { PageHeader } from '../src/components/organisms';
 import GlobalStyle from '../src/shared/global-style';
 
-const defaultTitle = 'Rick and Morty';
+const defaultTitle = 'Rick and Morty Demo';
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
@@ -41,7 +44,20 @@ const App = ({ Component, pageProps }) => (
           },
         ]}
       />
-      <Component {...pageProps} />
+      <Grid
+        container
+        direction="column"
+        spacing={1}
+      >
+        <Grid item>
+          <PageHeader />
+        </Grid>
+        <Grid item>
+          <Container>
+            <Component {...pageProps} />
+          </Container>
+        </Grid>
+      </Grid>
     </ThemeProvider>
   </QueryClientProvider>
 );
