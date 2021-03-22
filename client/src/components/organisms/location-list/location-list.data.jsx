@@ -26,12 +26,12 @@ const LocationListData = () => {
     >
       <Pagination
         disabled={isLoading}
-        totalPages={data.info.pages}
+        totalPages={data.pageInfo.totalPages}
         currentPage={page}
         onChange={changePage}
         size="lg"
       />
-      <LocationListView locations={data.results} />
+      <LocationListView locations={data.data} />
     </SimpleGrid>
   );
 };
