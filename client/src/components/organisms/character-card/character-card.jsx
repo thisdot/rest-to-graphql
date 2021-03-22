@@ -19,7 +19,7 @@ const CharacterCard = ({ character }) => (
     </Link>
     {character.status}
     {character.species}
-    Last Known Location: {character.location.name}
+    {/* Last Known Location: {character.location.name} */}
   </Card>
 );
 

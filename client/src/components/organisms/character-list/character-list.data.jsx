@@ -26,12 +26,12 @@ const CharacterListData = () => {
     >
       <Pagination
         disabled={isLoading}
-        totalPages={data.info.pages}
+        totalPages={data.pageInfo.totalPages}
         currentPage={page}
         onChange={changePage}
         size="lg"
       />
-      <CharacterListView characters={data.results} />
+      <CharacterListView characters={data.data} />
     </SimpleGrid>
   );
 };

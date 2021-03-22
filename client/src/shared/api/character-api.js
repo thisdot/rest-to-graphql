@@ -1,3 +1,5 @@
+const CHARACTER_API_URL = process.env.NEXT_PUBLIC_CHARACTER_API_URL;
+
 const characterFetch = async (url) => {
   const resp = await fetch(url);
   const respData =  await resp.json();
@@ -5,10 +7,10 @@ const characterFetch = async (url) => {
 };
 
 export const getAll = async ({ page = 1 }) => {
-  const data = await characterFetch(`https://rickandmortyapi.com/api/character?page=${page}`);
+  const data = await characterFetch(`${CHARACTER_API_URL}?page=${page}`);
   return data
 };
 
 export const getById = async (id) => {
-  return characterFetch(`https://rickandmortyapi.com/api/character/${id}`);
+  return characterFetch(`${CHARACTER_API_URL}/${id}`);
 };
