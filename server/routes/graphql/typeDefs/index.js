@@ -3,6 +3,7 @@ const { mergeTypeDefs } = require('@graphql-tools/merge');
 const { typeDefs: gqlScalarTypeDefs } = require('graphql-scalars');
 
 const character = require('./character');
+const location = require('./location');
 const pagination = require('./pagination');
 
 module.exports = mergeTypeDefs([
@@ -13,5 +14,6 @@ module.exports = mergeTypeDefs([
     }
   `,
   character,
+  location,
   pagination,
 ]);
