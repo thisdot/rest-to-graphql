@@ -1,4 +1,6 @@
-const { GraphQLObjectType, GraphQLString } = require('graphql');
+const { GraphQLObjectType, GraphQLString, GraphQLList } = require('graphql');
+const { charactersConnectionType, characterType } = require('../types');
+const { charactersResolver } = require('../resolvers');
 
 module.exports = new GraphQLObjectType({
   name: 'Query',
@@ -6,6 +8,10 @@ module.exports = new GraphQLObjectType({
     hello: {
       type: GraphQLString,
       resolve: () => "Hello world!"
+    },
+    characters: {
+      type: charactersConnectionType,
+      resolve: charactersResolver,
     },
   },
 });
