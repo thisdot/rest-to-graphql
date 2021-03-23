@@ -8,15 +8,17 @@ import CharacterListView from './character-list.view';
 
 const CharacterListData = () => {
   const [page, setPage] = useState(1);
-  const { isLoading, error, data } = useQuery(
+  const { isFetching, error, data } = useQuery(
     ['charactersData', page],
     async () => getAll({ page }),
   );
   const changePage = (event, page) => setPage(page);
 
-  if (isLoading) return 'Loading...'
+  if (isFetching) return 'Loading...'
 
   if (error) return 'Error occured! ' + error.message;
+
+  const { pageInfo, nodes } = data;
 
   return (
     <SimpleGrid
@@ -25,13 +27,13 @@ const CharacterListData = () => {
       alignItems="center"
     >
       <Pagination
-        disabled={isLoading}
-        totalPages={data.pageInfo.totalPages}
+        disabled={isFetching}
+        totalPages={pageInfo.totalPages}
         currentPage={page}
         onChange={changePage}
         size="lg"
       />
-      <CharacterListView characters={data.data} />
+      <CharacterListView characters={nodes} />
     </SimpleGrid>
   );
 };
