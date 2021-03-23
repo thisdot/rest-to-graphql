@@ -1,5 +1,6 @@
 import React from 'react';
-import { ProfileCard } from '../../molecules';
+import { Icon } from '../../atoms';
+import { ListWithIcons, ProfileCard } from '../../molecules';
 
 const CharacterCard = ({ character }) => (
   <ProfileCard
@@ -7,8 +8,13 @@ const CharacterCard = ({ character }) => (
     profileName={character.name}
     profileUrl={`/characters/${character.id}`}
   >
-    {character.status}
-    {character.species}
+    <ListWithIcons
+      items={[
+        { key: 'status', icon: <Icon name="favorite" />, text: character.status },
+        { key: 'species', icon: <Icon name="person" />, text: character.species },
+        // { key: 'location', icon: <Icon name="location" />, text: character.location },
+      ]}
+    />
   </ProfileCard>
 );
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { ProfileCard } from '../../molecules';
+import { Icon } from '../../atoms';
+import { ListWithIcons, ProfileCard } from '../../molecules';
 
 const LocationCard = ({ location }) => (
   <ProfileCard
@@ -7,8 +8,12 @@ const LocationCard = ({ location }) => (
     profileName={location.name}
     profileUrl={`/locations/${location.id}`}
   >
-    {location.type}
-    {location.dimension}
+    <ListWithIcons
+      items={[
+        { key: 'type', icon: <Icon name="globe" />, text: location.type },
+        { key: 'dimension', icon: <Icon name="dimension" />, text: location.dimension },
+      ]}
+    />
   </ProfileCard>
 );
 
