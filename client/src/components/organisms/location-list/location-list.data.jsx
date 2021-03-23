@@ -8,15 +8,17 @@ import LocationListView from './location-list.view';
 
 const LocationListData = () => {
   const [page, setPage] = useState(1);
-  const { isLoading, error, data } = useQuery(
+  const { isFetching, error, data } = useQuery(
     ['locationsData', page],
     async () => getAll({ page }),
   );
   const changePage = (event, page) => setPage(page);
 
-  if (isLoading) return 'Loading...'
+  if (isFetching) return 'Loading...'
 
   if (error) return 'Error occured! ' + error.message;
+
+  const { nodes, pageInfo } = data;
 
   return (
     <SimpleGrid
@@ -25,13 +27,13 @@ const LocationListData = () => {
       alignItems="center"
     >
       <Pagination
-        disabled={isLoading}
-        totalPages={data.pageInfo.totalPages}
+        disabled={isFetching}
+        totalPages={pageInfo.totalPages}
         currentPage={page}
         onChange={changePage}
         size="lg"
       />
-      <LocationListView locations={data.data} />
+      <LocationListView locations={nodes} />
     </SimpleGrid>
   );
 };
