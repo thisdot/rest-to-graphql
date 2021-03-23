@@ -11,8 +11,6 @@ module.exports = async (req, resp) => {
     Locations.count()
   ]);
 
-  resp.append('Access-Control-Allow-Origin', '*');
-  resp.append('Access-Control-Allow-Credentials', true);
   resp.status(200);
   resp.send({
     data: locations,
