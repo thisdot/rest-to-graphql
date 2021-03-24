@@ -17,8 +17,16 @@ export const getAll = async ({ page = 1 }) => {
         characters(pagination: $pagination) {
           nodes {
             id
+            currentLocation {
+              id
+              name
+            }
             image: avatar
             name
+            origin {
+              id
+              name
+            }
             status
             species
           }

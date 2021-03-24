@@ -12,7 +12,8 @@ const CharacterCard = ({ character }) => (
       items={[
         { key: 'status', icon: <Icon name="favorite" />, text: character.status },
         { key: 'species', icon: <Icon name="person" />, text: character.species },
-        // { key: 'location', icon: <Icon name="location" />, text: character.location },
+        { key: 'location', icon: <Icon name="location" />, text: character.currentLocation?.name ?? 'UNKNOWN' },
+        { key: 'origin', icon: <Icon name="home" />, text: character.origin?.name ?? 'UNKNOWN' },
       ]}
     />
   </ProfileCard>

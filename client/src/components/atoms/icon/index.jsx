@@ -3,6 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PublicIcon from '@material-ui/icons/Public';
 import MultilineChartIcon from '@material-ui/icons/MultilineChart';
+import HomeIcon from '@material-ui/icons/Home';
 
 const Icon = ({ name }) => {
   switch (name) {
@@ -15,7 +16,9 @@ const Icon = ({ name }) => {
     case 'globe':
       return <PublicIcon />;
     case 'dimension':
-      return <MultilineChartIcon />
+      return <MultilineChartIcon />;
+    case 'home':
+      return <HomeIcon />;
     default:
       return null;
   }
