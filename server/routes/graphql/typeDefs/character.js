@@ -4,8 +4,10 @@ const CharacterTypeDef = gql`
   type Character {
     id: ID!
     avatar: URL
+    currentLocation: Location
     gender: Gender
     name: String!
+    origin: Location
     species: String!
     status: CharacterStatus
     type: String!
