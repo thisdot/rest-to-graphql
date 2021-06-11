@@ -9,4 +9,5 @@ module.exports = mergeResolvers([
     },
   },
   require('./characterResolvers'),
+  require('./locationResolvers'),
 ]);
