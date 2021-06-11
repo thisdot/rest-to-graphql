@@ -1,4 +1,5 @@
 const { Locations } = require('../../../models');
+const { locationHelper } = require('../helpers');
 
 const resolvers = {
   Query: {
@@ -22,17 +23,7 @@ const resolvers = {
         }
       };
     },
-    location: async (parentValue, { id }, context) => {
-      if (id <= 0) {
-        throw new Error('ID must be a positive integer');
-      }
-
-      const location = await Locations.findByPk(id);
-      if (!location) {
-        throw new Error('Location cannot be found');
-      }
-      return location;
-    },
+    location: async (parentValue, { id }, context) => locationHelper.getLocation(id),
   }
 }
 

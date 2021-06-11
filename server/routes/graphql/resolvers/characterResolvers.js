@@ -1,8 +1,11 @@
 const { Characters } = require('../../../models');
+const { locationHelper } = require('../helpers');
 
 const resolvers = {
   Character: {
     avatar: async (character) => character.image,
+    currentLocation: async ({ locationId }) => locationHelper.getLocation(locationId, true),
+    origin: async ({ originId }) => locationHelper.getLocation(originId, true),
     status: async (character) => character.status ?? 'UNKNOWN',
   },
   Query: {
