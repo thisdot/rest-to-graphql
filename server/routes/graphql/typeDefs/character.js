@@ -1,6 +1,18 @@
 const gql = require('graphql-tag');
 
 const CharacterTypeDef = gql`
+  enum CharacterStatus {
+    ALIVE
+    DEAD
+    UNKNOWN
+  }
+
+  enum Gender {
+    GENDERLESS
+    FEMALE
+    MALE
+  }
+
   type Character {
     id: ID!
     avatar: URL
@@ -16,18 +28,6 @@ const CharacterTypeDef = gql`
   type CharacterConnection {
     nodes: [Character]
     pageInfo: PageInfo
-  }
-
-  enum CharacterStatus {
-    ALIVE
-    DEAD
-    UNKNOWN
-  }
-
-  enum Gender {
-    GENDERLESS
-    FEMALE
-    MALE
   }
 
   type Query {
