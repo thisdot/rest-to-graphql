@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const { Characters } = require('../../../models');
 
 const resolvers = {
   Character: {
@@ -8,14 +8,34 @@ const resolvers = {
   Query: {
     characters: async (parentValue, { pagination = {} }, context) => {
       const { page = 1, perPage = 20 } = pagination;
-      const resp = await fetch(`http://localhost:4000/characters?page=${page}&perPage=${perPage}`);
-      const { data: nodes, pageInfo } = await resp.json();
-      return { nodes, pageInfo };
+      const [characters, charactersCount] = await Promise.all([
+        Characters.findAll({
+          limit: perPage,
+          offset: (page - 1) * perPage,
+        }),
+        Characters.count()
+      ]);
+
+      return {
+        nodes: characters,
+        pageInfo: {
+          page: page,
+          perPage: perPage,
+          total: charactersCount,
+          totalPages: Math.ceil(charactersCount / perPage ),
+        }
+      };
     },
     character: async (parentValue, { id }, context) => {
-      const resp = await fetch(`http://localhost:4000/characters/${id}`);
-      const { data } = await resp.json();
-      return data;
+      if (id <= 0) {
+        throw new Error('ID must be a positive integer');
+      }
+
+      const character = await Characters.findByPk(id);
+      if (!character) {
+        throw new Error('Character cannot be found');
+      }
+      return character;
     },
   }
 }
