@@ -1,4 +1,7 @@
+import { request, gql } from "graphql-request";
+
 const CHARACTER_API_URL = process.env.NEXT_PUBLIC_CHARACTER_API_URL;
+const GRAPHQL_API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL;
 
 const characterFetch = async (url) => {
   const resp = await fetch(url);
@@ -7,8 +10,32 @@ const characterFetch = async (url) => {
 };
 
 export const getAll = async ({ page = 1 }) => {
-  const data = await characterFetch(`${CHARACTER_API_URL}?page=${page}`);
-  return data
+  const resp = await request(
+    GRAPHQL_API_URL,
+    gql`
+      query Characters($pagination: PaginationInput) {
+        characters(pagination: $pagination) {
+          nodes {
+            id
+            image: avatar
+            name
+            status
+            species
+          }
+          pageInfo {
+            totalPages
+          }
+        }
+      }
+    `,
+    {
+      pagination: {
+        page,
+        perPage: 18,
+      },
+    }
+  );
+  return resp.characters;
 };
 
 export const getById = async (id) => {
