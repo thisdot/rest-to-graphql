@@ -8,4 +8,5 @@ module.exports = mergeResolvers([
       hello: async () => 'Hello World',
     },
   },
+  require('./characterResolvers'),
 ]);
