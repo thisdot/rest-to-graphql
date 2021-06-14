@@ -1,9 +1,12 @@
 const { mergeTypeDefs } = require('@graphql-tools/merge');
-const { typeDefs: gqlScalarTypeDefs } = require('graphql-scalars');
+const { URLTypeDefinition } = require('graphql-scalars');
 
 module.exports = mergeTypeDefs([
-  gqlScalarTypeDefs,
+  {
+    URLTypeDefinition,
+  },
   require('./character'),
+  require('./datetime'),
   require('./location'),
   require('./pagination'),
 ]);

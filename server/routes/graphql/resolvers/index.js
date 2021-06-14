@@ -1,8 +1,11 @@
 const { mergeResolvers } = require('@graphql-tools/merge')
-const { resolvers: gqlScalarResolvers } = require('graphql-scalars');
+const { URLResolver } = require('graphql-scalars');
 
 module.exports = mergeResolvers([
-  gqlScalarResolvers,
+  {
+    URLResolver,
+  },
   require('./characterResolvers'),
+  require('./datetimeResolvers'),
   require('./locationResolvers'),
 ]);

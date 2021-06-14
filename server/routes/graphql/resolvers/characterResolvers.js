@@ -1,9 +1,11 @@
 const { Characters } = require('../../../models');
+const { datetimeHelper, locationHelper } = require('../helpers');
 const { characterLoader } = require('../loaders');
 
 const resolvers = {
   Character: {
     avatar: async (character) => character.image,
+    createdAt: async ({ createdAt }, { format }) => datetimeHelper.formatDateTime(createdAt, format),
     currentLocation: async ({ locationId }) => locationHelper.getLocation(locationId, true),
     origin: async ({ originId }) => locationHelper.getLocation(originId, true),
     status: async (character) => character.status ?? 'UNKNOWN',

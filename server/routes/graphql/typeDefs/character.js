@@ -13,9 +13,12 @@ const CharacterTypeDef = gql`
     MALE
   }
 
+  "A object representing a character in the rick & morty universe"
   type Character {
     id: ID!
-    avatar: URL
+    "URL to their avatar image"
+    avatar: String
+    createdAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
     currentLocation: Location
     gender: Gender
     name: String!
@@ -31,6 +34,7 @@ const CharacterTypeDef = gql`
   }
 
   type Query {
+    "A paginated query to fetch all the characters"
     characters(pagination: PaginationInput): CharacterConnection
     character(id: ID!): Character
   }
