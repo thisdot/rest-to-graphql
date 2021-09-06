@@ -11,23 +11,22 @@ const ProfileCard = ({
   profileImage,
   profileName,
   profileUrl,
+  onClick,
   children,
 }) => (
-  <Card>
-    <Link href={profileUrl} color="textPrimary" underline="none">
-      {profileImage && (
-        <CardMedia
-          image={profileImage}
-          title={profileName}
-        />
-      )}
-      <CardContent>
-        <Typography type="h4">
-          {profileName}
-        </Typography>
-        {children}
-      </CardContent>
-    </Link>
+  <Card onClick={onClick}>
+    {profileImage && (
+      <CardMedia
+        image={profileImage}
+        title={profileName}
+      />
+    )}
+    <CardContent>
+      <Typography type="h4">
+        {profileName}
+      </Typography>
+      {children}
+    </CardContent>
   </Card>
 );
 

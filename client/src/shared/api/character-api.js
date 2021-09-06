@@ -17,10 +17,32 @@ export const CHARACTERS_QUERY = gql`
         id
         image: avatar
         name
+        __typename
       }
       pageInfo {
         totalPages
       }
+    }
+  }
+`;
+
+export const CHARACTER_QUERY = gql`
+  query Character($id: ID!) {
+    character(id: $id) {
+      id
+      # currentLocation {
+      #   id
+      #   name
+      # }
+      avatar
+      name
+      __typename
+      # origin {
+      #   id
+      #   name
+      # }
+      # status
+      # species
     }
   }
 `;
