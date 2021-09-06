@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Location.hasMany(models.Characters, {
+        foreignKey: 'locationId',
+      });
+      Location.hasMany(models.Characters, {
+        foreignKey: 'originId',
+      });
     }
   };
   Location.init({
