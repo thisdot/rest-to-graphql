@@ -1,5 +1,3 @@
-'use strict';
-
 const appearances = require('./appearances.json');
 
 module.exports = {

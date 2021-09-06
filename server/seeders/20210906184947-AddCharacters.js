@@ -1,5 +1,3 @@
-'use strict';
-
 const characters = require('./characters.json');
 
 module.exports = {

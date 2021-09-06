@@ -1,5 +1,3 @@
-'use strict';
-
 const locations = require('./locations.json');
 
 module.exports = {

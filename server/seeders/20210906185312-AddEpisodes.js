@@ -1,5 +1,3 @@
-'use strict';
-
 const episodes = require('./episodes.json');
 
 module.exports = {
