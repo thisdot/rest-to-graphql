@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'origin',
         foreignKey: 'originId',
       });
+      Character.belongsToMany(models.Episode, {
+        through: models.Appearance,
+      });
     }
   };
   Character.init({
