@@ -1,4 +1,5 @@
 const { Characters } = require('../../../models');
+const { characterLoader } = require('../loaders');
 const { locationHelper } = require('../helpers');
 
 const resolvers = {
@@ -34,7 +35,7 @@ const resolvers = {
         throw new Error('ID must be a positive integer');
       }
 
-      const character = await Characters.findByPk(id);
+      const character = await characterLoader.load(id);
       if (!character) {
         throw new Error('Character cannot be found');
       }
