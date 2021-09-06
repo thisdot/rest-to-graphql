@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-query'
+import { useQuery } from '@apollo/client';
 
-import { getAll } from '../../../shared/api/character-api';
+import { CHARACTERS_QUERY } from '../../../shared/api/character-api';
 import { SimpleGrid } from '../../atoms';
 import { Pagination } from '../../molecules';
 import CharacterListView from './character-list.view';
 
 const CharacterListData = () => {
   const [page, setPage] = useState(1);
-  const { isFetching, error, data } = useQuery(
-    ['charactersData', page],
-    async () => getAll({ page }),
-  );
+  const { data, loading, error } = useQuery(CHARACTERS_QUERY, {
+    variables: {
+      pagination: {
+        page,
+        perPage: 9,
+      }
+    }
+  });
   const changePage = (event, page) => setPage(page);
 
-  if (isFetching) return 'Loading...'
+  if (loading) return 'Loading...'
 
   if (error) return 'Error occured! ' + error.message;
 
-  const { pageInfo, nodes } = data;
+  const { pageInfo, nodes } = data.characters;
 
   return (
     <SimpleGrid
@@ -27,13 +31,13 @@ const CharacterListData = () => {
       alignItems="center"
     >
       <Pagination
-        disabled={isFetching}
-        totalPages={pageInfo.totalPages}
+        disabled={loading}
+        totalPages={pageInfo?.totalPages}
         currentPage={page}
         onChange={changePage}
         size="lg"
       />
-      <CharacterListView characters={nodes} />
+      <CharacterListView characters={nodes || []} />
     </SimpleGrid>
   );
 };

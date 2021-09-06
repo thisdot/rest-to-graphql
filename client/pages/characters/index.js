@@ -1,10 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { QueryClient } from 'react-query';
-import { dehydrate } from 'react-query/hydration';
 
+import client from '../../apollo-client';
 import { CharacterList } from '../../src/components/organisms';
-import { getAll } from '../../src/shared/api/character-api';
+import { CHARACTERS_QUERY } from '../../src/shared/api/character-api';
 
 const Characters = ({ charactersData }) => (
   <>
@@ -18,17 +17,19 @@ const Characters = ({ charactersData }) => (
 
 export default Characters;
 
-export async function getServerSideProps(context) {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(
-    ['charactersData', 1],
-    async () => getAll({ page: 1 })
-  );
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+// export async function getServerSideProps(context) {
+//   const { data } = await client.query({
+//     query: CHARACTERS_QUERY,
+//     variables: {
+//       pagination: {
+//         page: 1,
+//         perPage: 9,
+//       },
+//     },
+//   });
+//   return {
+//     props: {
+//       charactersData: data,
+//     }
+//   };
+// }
