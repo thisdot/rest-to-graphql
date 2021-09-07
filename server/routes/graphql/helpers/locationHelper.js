@@ -1,6 +1,10 @@
 const { locationLoader } = require('../loaders');
 
 const getLocation = async (id, skipErrors = false) => {
+  if (!id) {
+    return null;
+  }
+
   if (id <= 0 && !skipErrors) {
     throw new Error('ID must be a positive integer');
   }
