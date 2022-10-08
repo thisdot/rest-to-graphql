@@ -1,3 +1,4 @@
+const { Locations } = require('../../../models');
 const { locationLoader } = require('../loaders');
 
 const getLocation = async (id, skipErrors = false) => {
@@ -10,6 +11,7 @@ const getLocation = async (id, skipErrors = false) => {
   }
 
   const location = await locationLoader.load(id);
+  // const location = await Locations.findByPk(id);
   if (!location && !skipErrors) {
     throw new Error('Location cannot be found');
   }

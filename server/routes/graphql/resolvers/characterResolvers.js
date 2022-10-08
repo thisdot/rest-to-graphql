@@ -1,12 +1,12 @@
-const { Characters } = require('../../../models');
+const { Characters, Locations } = require('../../../models');
 const { characterLoader } = require('../loaders');
 const { locationHelper } = require('../helpers');
 
 const resolvers = {
   Character: {
     avatar: async (character) => character.image,
-    currentLocation: async ({ locationId }) => locationHelper.getLocation(locationId, true),
-    origin: async ({ originId }) => locationHelper.getLocation(originId, true),
+    currentLocation: async ({ locationId }) => Locations.findByPk(locationId),
+    origin: async ({ originId }) => Locations.findByPk(originId),
     status: async (character) => character.status ?? 'UNKNOWN',
   },
   Query: {

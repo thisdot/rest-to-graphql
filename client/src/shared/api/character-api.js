@@ -1,5 +1,5 @@
 // import { request } from "graphql-request";
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // const CHARACTER_API_URL = process.env.NEXT_PUBLIC_CHARACTER_API_URL;
 // const GRAPHQL_API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL;
@@ -30,19 +30,19 @@ export const CHARACTER_QUERY = gql`
   query Character($id: ID!) {
     character(id: $id) {
       id
-      # currentLocation {
-      #   id
-      #   name
-      # }
+      currentLocation {
+        id
+        name
+      }
       avatar
       name
       __typename
-      # origin {
-      #   id
-      #   name
-      # }
-      # status
-      # species
+      origin {
+        id
+        name
+      }
+      status
+      species
     }
   }
 `;
