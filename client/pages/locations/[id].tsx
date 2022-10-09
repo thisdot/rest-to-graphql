@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import Layout from "@components/Layout";
 import { Dotter, DotterProps } from "@components/Dotter";
 import { getLocationById } from "@utils/LocationService";
+import { getLocationName } from "@utils/getLocationName";
 
 type Props = {
 	location: {
@@ -15,20 +16,13 @@ type Props = {
 };
 
 const LocationDetails: FC<Props> = ({ location }) => {
-	let locationName;
-	if (location.state) {
-		locationName = `${location.city}, ${location.state}, ${location.country}`;
-	} else {
-		locationName = `${location.city}, ${location.country}`;
-	}
-
 	return (
 		<Layout>
-			<h1 className="text-4xl mb-8">{locationName}</h1>
+			<h1 className="text-4xl mb-8">{getLocationName(location)}</h1>
 			<div className="grid gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
 				{location.dotters.map((dotter) => (
 					<a href={`/dotter/${dotter.id}`} key={dotter.id} className="w-full">
-						<Dotter dotter={dotter} />
+						<Dotter dotter={dotter} hideLocation={true} />
 					</a>
 				))}
 			</div>

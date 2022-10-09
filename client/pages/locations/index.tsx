@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import Layout from "@components/Layout";
 import { DotterProps } from "@components/Dotter";
 import { getLocations } from "@utils/LocationService";
+import { getLocationName } from "@utils/getLocationName";
 
 type Props = {
 	locations: {
@@ -13,14 +14,6 @@ type Props = {
 		dotters: DotterProps[];
 	}[];
 };
-
-function getLocationName(location) {
-	if (location.state) {
-		return `${location.city}, ${location.state}, ${location.country}`;
-	}
-
-	return `${location.city}, ${location.country}`;
-}
 
 const LocationsIndex: React.FC<Props> = (props) => {
 	return (

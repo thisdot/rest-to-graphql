@@ -24,6 +24,9 @@ routes.get("/", async (req, res) => {
 		prisma.dotter.findMany({
 			take: perPage,
 			skip: (page - 1) * perPage,
+			include: {
+				location: true,
+			},
 		}),
 	]);
 
@@ -65,6 +68,9 @@ routes.get("/:id", async (req, res) => {
 
 	const dotter = await prisma.dotter.findUnique({
 		where: { id: Number(id) },
+		include: {
+			location: true,
+		},
 	});
 
 	if (!dotter) {

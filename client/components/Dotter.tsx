@@ -1,3 +1,4 @@
+import { getLocationName } from "@utils/getLocationName";
 import { FC } from "react";
 
 export type DotterProps = {
@@ -6,10 +7,19 @@ export type DotterProps = {
 	lastName: string;
 	title: string;
 	profilePic: string;
+	location?: {
+		id: number;
+		city: string;
+		state: string;
+		country: string;
+	};
 };
 
-export const Dotter: FC<{ dotter: DotterProps }> = ({ dotter }) => {
-	const { firstName, lastName, title, profilePic } = dotter;
+export const Dotter: FC<{ dotter: DotterProps; hideLocation: boolean }> = ({
+	dotter,
+	hideLocation = false,
+}) => {
+	const { firstName, lastName, title, profilePic, location } = dotter;
 	return (
 		<div className="w-full rounded overflow-hidden shadow-lg bg-slate-100">
 			<img
@@ -21,7 +31,10 @@ export const Dotter: FC<{ dotter: DotterProps }> = ({ dotter }) => {
 				<div className="font-bold text-xl mb-2">
 					{firstName} {lastName}
 				</div>
-				<p className="text-gray-700 text-base">{title}</p>
+				<p className="text-gray-700 text-lg">{title}</p>
+				{!hideLocation && (
+					<p className="text-gray-700 text-sm">{getLocationName(location)}</p>
+				)}
 			</div>
 		</div>
 	);
