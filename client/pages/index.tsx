@@ -2,6 +2,7 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import { Dotter, DotterProps } from "@components/Dotter";
 import Layout from "@components/Layout";
+import { getDotters } from "@utils/DotterService";
 
 type Props = {
 	dotters: DotterProps[];
@@ -24,8 +25,7 @@ const DottersIndex: React.FC<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters`);
-	const dotters = await res.json();
+	const dotters = await getDotters();
 	return {
 		props: { dotters },
 	};

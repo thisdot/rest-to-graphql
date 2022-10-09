@@ -2,6 +2,7 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import Layout from "@components/Layout";
 import { DotterProps } from "@components/Dotter";
+import { getLocations } from "@utils/LocationService";
 
 type Props = {
 	locations: {
@@ -41,8 +42,7 @@ const LocationsIndex: React.FC<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}locations`);
-	const locations = await res.json();
+	const locations = await getLocations();
 	return {
 		props: { locations },
 	};
