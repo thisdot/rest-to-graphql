@@ -1,49 +1,34 @@
-import React from 'react'
-import { GetServerSideProps } from 'next'
-import Layout from '../components/Layout'
-import Post, { PostProps } from '../components/Post'
+import React from "react";
+import { GetServerSideProps } from "next";
+import { Dotter, DotterProps } from "../components/Dotter";
+import Layout from "../components/Layout";
 
 type Props = {
-  feed: PostProps[]
-}
+	dotters: DotterProps[];
+};
 
-const Blog : React.FC<Props> = props => {
-  return (
-    <Layout>
-      <div className="page">
-        <h1>My Blog</h1>
-        <main>
-          {props.feed.map(post => (
-            <div key={post.id} className="post">
-              <Post post={post} />
-            </div>
-          ))}
-        </main>
-      </div>
-      <style jsx>{`
-        .post {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
-        }
-      `}</style>
-    </Layout>
-  )
-}
+const DottersIndex: React.FC<Props> = (props) => {
+	return (
+		<Layout>
+			<h1 className="text-4xl mb-8">This Dotters</h1>
+			<div className="grid gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
+				{props.dotters.map((dotter) => (
+					<a href={`/dotter/${dotter.id}`} key={dotter.id} className="w-full">
+						<Dotter dotter={dotter} />
+					</a>
+				))}
+			</div>
+			<div>TODO: add pagination here</div>
+		</Layout>
+	);
+};
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3001/feed')
-  const feed = await res.json()
-  return {
-    props: { feed },
-  }
-}
+	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters`);
+	const dotters = await res.json();
+	return {
+		props: { dotters },
+	};
+};
 
-export default Blog
+export default DottersIndex;
