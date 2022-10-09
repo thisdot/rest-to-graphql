@@ -6,6 +6,16 @@ export const getDotters = async (page = 1, perPage = 8) => {
 	return dottersConnection;
 };
 
+export const createDotter = async (data) => {
+	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(data),
+	});
+	const newDotter = await res.json();
+	return newDotter;
+};
+
 export const getDotterById = async (id) => {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters/${id}`);
 	const dotter = await res.json();

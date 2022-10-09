@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import { FC, SyntheticEvent } from "react";
 import Layout from "../../components/Layout";
 import Router from "next/router";
+import { createDotter } from "@utils/DotterService";
 
-const Draft: React.FC = () => {
-	const [title, setTitle] = useState("");
-	const [content, setContent] = useState("");
-	const [authorEmail, setAuthorEmail] = useState("");
-
-	const submitData = async (e: React.SyntheticEvent) => {
-		e.preventDefault();
+const Draft: FC = () => {
+	const submitData = async (evt: SyntheticEvent) => {
+		evt.preventDefault();
 		try {
-			const body = { title, content, authorEmail };
-			await fetch(`http://localhost:3001/post`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(body),
-			});
-			await Router.push("/drafts");
+			const data = {
+				firstName: evt.target.firstName.value,
+				lastName: evt.target.lastName.value,
+				title: evt.target.title.value,
+				profilePic: evt.target.profilePic.value,
+				city: evt.target.city.value,
+				state: evt.target.state.value,
+				country: evt.target.country.value,
+			};
+			const dotter = await createDotter(data);
+			await Router.push("/dotter/[id]", `/dotter/${dotter.id}`);
 		} catch (error) {
 			console.error(error);
 		}
@@ -26,65 +27,85 @@ const Draft: React.FC = () => {
 		<Layout>
 			<div>
 				<form onSubmit={submitData}>
-					<h1>Create Draft</h1>
+					<h1 className="text-4xl mb-4">Create New Dotter</h1>
+
+					<label htmlFor="firstName">First Name</label>
 					<input
+						type="text"
+						className="w-full p-2 m-2 mb-4 rounded border-gray-300 border-2"
+						id="firstName"
+						name="firstName"
+						placeholder="John"
+						required
 						autoFocus
-						onChange={(e) => setTitle(e.target.value)}
-						placeholder="Title"
-						type="text"
-						value={title}
 					/>
+
+					<label htmlFor="lastName">Last Name</label>
 					<input
-						onChange={(e) => setAuthorEmail(e.target.value)}
-						placeholder="Author (email address)"
 						type="text"
-						value={authorEmail}
+						className="w-full p-2 m-2 mb-4 rounded border-gray-300 border-2"
+						id="lastName"
+						name="lastName"
+						placeholder="Doe"
+						required
 					/>
-					<textarea
-						cols={50}
-						onChange={(e) => setContent(e.target.value)}
-						placeholder="Content"
-						rows={8}
-						value={content}
-					/>
+
+					<label htmlFor="title">Title</label>
 					<input
-						disabled={!content || !title || !authorEmail}
+						type="text"
+						className="w-full p-2 m-2 mb-4 rounded border-gray-300 border-2"
+						id="title"
+						name="title"
+						placeholder="Software Engineer"
+						required
+					/>
+
+					<label htmlFor="profilePic">Profile Picture</label>
+					<input
+						type="url"
+						className="w-full p-2 m-2 mb-4 rounded border-gray-300 border-2"
+						id="profilePic"
+						name="profilePic"
+						placeholder="https://"
+						required
+					/>
+
+					<label htmlFor="city">City</label>
+					<input
+						type="text"
+						className="w-full p-2 m-2 mb-4 rounded border-gray-300 border-2"
+						id="city"
+						name="city"
+						placeholder="San Francisco"
+						required
+					/>
+
+					<label htmlFor="state">State</label>
+					<input
+						type="text"
+						className="w-full p-2 m-2 mb-4 rounded border-gray-300 border-2"
+						id="state"
+						name="state"
+						placeholder="CA"
+					/>
+
+					<label htmlFor="country">Country</label>
+					<input
+						type="text"
+						className="w-full p-2 m-2 mb-4 rounded border-gray-300 border-2"
+						id="country"
+						name="country"
+						placeholder="USA"
+						required
+					/>
+
+					<input
 						type="submit"
-						value="Create"
+						value="Create Dotter"
+						className="bg-blue-300 px-4 py-2 rounded"
 					/>
-					<a className="back" href="#" onClick={() => Router.push("/")}>
-						or Cancel
-					</a>
 				</form>
 			</div>
-			<style jsx>{`
-				.page {
-					background: white;
-					padding: 3rem;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-				}
-
-				input[type="text"],
-				textarea {
-					width: 100%;
-					padding: 0.5rem;
-					margin: 0.5rem 0;
-					border-radius: 0.25rem;
-					border: 0.125rem solid rgba(0, 0, 0, 0.2);
-				}
-
-				input[type="submit"] {
-					background: #ececec;
-					border: 0;
-					padding: 1rem 2rem;
-				}
-
-				.back {
-					margin-left: 1rem;
-				}
-			`}</style>
 		</Layout>
 	);
 };
