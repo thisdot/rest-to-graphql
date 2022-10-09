@@ -1,5 +1,7 @@
 export const getDotters = async (page = 1, perPage = 8) => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters`);
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_API_URL}dotters?page=${page}&perPage=${perPage}`
+	);
 	const dottersConnection = await res.json();
 	return dottersConnection;
 };

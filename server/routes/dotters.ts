@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 routes.get("/", async (req, res) => {
 	const page = Number(req.query.page ?? 1);
-	const perPage = Number(req.query.perPage ?? 8);
+	const perPage = Number(req.query.perPage ?? 6);
 
 	if (isNaN(page)) {
 		res.status(400).send("Invalid page value");
@@ -19,12 +19,23 @@ routes.get("/", async (req, res) => {
 		return;
 	}
 
-	const dotters = await prisma.dotter.findMany({
-		take: perPage,
-		skip: (page - 1) * perPage,
-	});
+	const [count, dotters] = await prisma.$transaction([
+		prisma.dotter.count(),
+		prisma.dotter.findMany({
+			take: perPage,
+			skip: (page - 1) * perPage,
+		}),
+	]);
 
-	res.json(dotters);
+	res.json({
+		data: dotters,
+		pageInfo: {
+			page,
+			perPage,
+			total: count,
+			totalPages: Math.ceil(count / perPage),
+		},
+	});
 });
 
 routes.post("/", async (req, res) => {
