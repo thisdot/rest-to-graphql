@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { GetServerSideProps } from "next";
-import Layout from "../../components/Layout";
+import Layout from "@components/Layout";
 import Router from "next/router";
-import { Dotter, DotterProps } from "../../components/Dotter";
+import { Dotter, DotterProps } from "@components/Dotter";
 
 async function update(id: number): Promise<void> {
 	await fetch(`http://localhost:3001/publish/${id}`, {

@@ -1,7 +1,7 @@
 import React from "react";
 import { GetServerSideProps } from "next";
-import { Dotter, DotterProps } from "../components/Dotter";
-import Layout from "../components/Layout";
+import { Dotter, DotterProps } from "@components/Dotter";
+import Layout from "@components/Layout";
 
 type Props = {
 	dotters: DotterProps[];
