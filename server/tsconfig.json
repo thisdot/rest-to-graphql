@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"baseUrl": "./",
+		"baseUrl": ".",
 		"sourceMap": true,
 		"outDir": "dist",
 		"strict": true,
@@ -9,5 +9,8 @@
 		"paths": {
 			"@utils/*": ["utils/*"]
 		}
+	},
+	"ts-node": {
+		"require": ["tsconfig-paths/register"]
 	}
 }
