@@ -51,7 +51,9 @@ routes.post("/", async (req, res) => {
 			lastName,
 			title,
 			profilePic,
-			location: generateConnectOrCreate(city, state, country),
+			location: {
+				connectOrCreate: generateConnectOrCreate(city, state, country),
+			},
 		},
 	});
 
