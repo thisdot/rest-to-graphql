@@ -15,7 +15,7 @@ export type DotterProps = {
 	};
 };
 
-export const Dotter: FC<{ dotter: DotterProps; hideLocation: boolean }> = ({
+export const Dotter: FC<{ dotter: DotterProps; hideLocation?: boolean }> = ({
 	dotter,
 	hideLocation = false,
 }) => {
