@@ -24,10 +24,10 @@ const Header: FC = () => {
 				</Link>
 			</div>
 			<div className="ml-auto">
-				<Link href="/dotters/create">
+				<Link href="/dotter/create">
 					<a
 						className={`${
-							isActive("/dotters/create") ? "text-gray-500" : null
+							isActive("/dotter/create") ? "text-gray-500" : null
 						} border-black border-2 px-2 py-2 rounded-sm`}
 					>
 						+ Create Dotter
