@@ -73,4 +73,4 @@ yarn dev
 3. Create your resolvers using your preferred methodology
 4. Setup your choice for GraphQL client
 5. Update existing API calls with GraphQL calls
-6. :shipit:
+6. 🚢
