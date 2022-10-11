@@ -1,29 +1,69 @@
+# Server
+
+## Tech Used
+
+- Express.js
+- Prisma ORM
+
+## Getting started
+
+```bash
+cp .env.example .env
+yarn
+yarn dev
+```
+
+## Structure
+
+- models: function wrappers around the prisma ORM
+- prisma: contains the schema and auto-generated migration files
+- routes: contains the configuration for all express routes
+- utils: helper functions and classes
+
 ## Using the REST API
 
-You can also access the REST API of the API server directly. It is running [`localhost:3001`](http://localhost:3001) (so you can e.g. reach the API with [`localhost:3000/feed`](http://localhost:3001/feed)).
+The REST API can be accessed directly at [`localhost:4000`](http://localhost:4000).
 
 ### `GET`
 
-- `/api/post/:id`: Fetch a single post by its `id`
-- `/api/feed`: Fetch all _published_ posts
-- `/api/filterPosts?searchString={searchString}`: Filter posts by `title` or `content`
+- `/dotters`: Fetch all Dotters
+  - Query Params:
+    - `page`: 1-index paging
+    - `perPage`: # of results to return per page
+    - `includeLocation`: Include the related location record
+- `/dotters/:id`: Fetch a single Dotter by its `id`
+  - Query Params:
+    - `includeLocation`: Include the related location record
+- `/locations`: Fetch all Locations
+  - Query Params:
+    - `page`: 1-index paging
+    - `perPage`: # of results to return per page
+    - `includeDotters`: Include the related Dotter records
+- `/locations/:id`: Fetch a location by its `id`
+  - Query Params:
+    - `includeDotters`: Include the related Dotter records
 
 ### `POST`
 
-- `/api/post`: Create a new post
+- `/dotters`: Create a new Dotter
   - Body:
-    - `title: String` (required): The title of the post
-    - `content: String` (optional): The content of the post
-    - `authorEmail: String` (required): The email of the user that creates the post
-- `/api/user`: Create a new user
-  - Body:
-    - `email: String` (required): The email address of the user
-    - `name: String` (optional): The name of the user
+    - `firstName: String` (required): The firstName of the Dotter
+    - `lastName: String` (required): The lastName of the Dotter
+    - `title: String` (required): The title of the Dotter
+    - `profilePic: String` (required): The profilePic of the Dotter
+    - `city: String` (required): The city of the Dotter
+    - `state: String` (optional): The state of the Dotter
+    - `country: String` (required): The firstName of the Dotter
 
 ### `PUT`
 
-- `/api/publish/:id`: Publish a post by its `id`
+- `/dotters/:id`: Update a Dotter by its `id`
+  - Body:
+    - `firstName: String` (required): The firstName of the Dotter
+    - `lastName: String` (required): The lastName of the Dotter
+    - `title: String` (required): The title of the Dotter
+    - `profilePic: String` (required): The profilePic of the Dotter
 
 ### `DELETE`
 
-- `/api/post/:id`: Delete a post by its `id`
+- `/dotters/:id`: Delete a Dotter by its `id`
