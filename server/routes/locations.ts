@@ -1,39 +1,62 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
+import { getAll, get } from "@models/location";
+import { ValidationError } from "@utils/errors";
 
 const routes = Router();
-const prisma = new PrismaClient();
 
 routes.get("/", async (req, res) => {
-	const locations = await prisma.location.findMany({
-		include: {
-			dotters: true,
-		},
-	});
-	res.json(locations);
+	const page = Number(req.query.page ?? 1);
+	const perPage = Number(req.query.perPage ?? 6);
+	const includeDotters = Boolean(req.query.includeDotters ?? false);
+
+	try {
+		const { locations, count } = await getAll({
+			perPage,
+			page,
+			includeDotters,
+		});
+
+		res.json({
+			data: locations,
+			pageInfo: {
+				page,
+				perPage,
+				total: count,
+				totalPages: Math.ceil(count / perPage),
+			},
+		});
+	} catch (err) {
+		if (err instanceof ValidationError) {
+			res.status(400).send(err.message);
+			return;
+		}
+		res.status(500).send(err);
+	}
 });
 
 routes.get("/:id", async (req, res) => {
-	const { id } = req.params;
+	const id = Number(req.params.id);
+	const includeDotters = Boolean(req.query.includeDotters ?? false);
 
-	if (isNaN(Number(id))) {
-		res.status(400).send("Invalid identifier");
-		return;
+	try {
+		const location = await get(id, {
+			includeDotters,
+		});
+
+		if (!location) {
+			res.status(404).send("Location not found.");
+			return;
+		}
+
+		res.json(location);
+	} catch (err) {
+		if (err instanceof ValidationError) {
+			res.status(400).send(err.message);
+			return;
+		}
+		res.status(500).send(err);
 	}
-
-	const location = await prisma.location.findUnique({
-		where: { id: Number(id) },
-		include: {
-			dotters: true,
-		},
-	});
-
-	if (!location) {
-		res.status(404).send("Location not found.");
-		return;
-	}
-
-	res.json(location);
 });
 
 export default routes;

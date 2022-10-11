@@ -35,9 +35,9 @@ const LocationsIndex: React.FC<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const locations = await getLocations();
+	const { data } = await getLocations();
 	return {
-		props: { locations },
+		props: { locations: data },
 	};
 };
 
