@@ -65,3 +65,12 @@ yarn dev
 cd client
 yarn dev
 ```
+
+## Migration Steps
+
+1. Setup your GraphQL Server
+2. Define your schema
+3. Create your resolvers using your preferred methodology
+4. Setup your choice for GraphQL client
+5. Update existing API calls with GraphQL calls
+6. 🚢

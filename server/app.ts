@@ -1,15 +1,24 @@
 import express from "express";
+import { ApolloServer } from "apollo-server-express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import routes from "./routes";
+import routes, { typeDefs, resolvers } from "./routes";
 
-const app = express();
-const PORT = process.env.PORT ?? 4000;
+async function main() {
+	const app = express();
+	const PORT = process.env.PORT ?? 4000;
 
-app.use(bodyParser.json());
-app.use(cors());
-app.use("/", routes);
+	const server = new ApolloServer({ typeDefs, resolvers });
+	await server.start();
+	server.applyMiddleware({ app });
 
-app.listen(PORT, () => {
-	console.log(`🚀 Server ready at: http://localhost:${PORT}`);
-});
+	app.use(bodyParser.json());
+	app.use(cors());
+	app.use("/", routes);
+
+	app.listen(PORT, () => {
+		console.log(`🚀 Server ready at: http://localhost:${PORT}`);
+	});
+}
+
+main();
