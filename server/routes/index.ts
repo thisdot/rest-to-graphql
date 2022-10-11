@@ -14,3 +14,5 @@ routes.get("/healthcheck", async (req, res) => {
 });
 
 export default routes;
+
+export { typeDefs, resolvers } from "./graphql";
