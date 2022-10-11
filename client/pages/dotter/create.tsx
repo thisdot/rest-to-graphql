@@ -1,21 +1,23 @@
 import { FC, SyntheticEvent } from "react";
-import Layout from "../../components/Layout";
 import Router from "next/router";
+import { useForm, SubmitHandler } from "react-hook-form";
+import Layout from "@components/Layout";
 import { createDotter } from "@utils/DotterService";
 
+type Inputs = {
+	firstName: string;
+	lastName: string;
+	title: string;
+	profilePic: string;
+	city: string;
+	state: string;
+	country: string;
+};
+
 const Draft: FC = () => {
-	const submitData = async (evt: SyntheticEvent) => {
-		evt.preventDefault();
+	const { register, handleSubmit } = useForm<Inputs>();
+	const onSubmit: SubmitHandler<Inputs> = async (data) => {
 		try {
-			const data = {
-				firstName: evt.target.firstName.value,
-				lastName: evt.target.lastName.value,
-				title: evt.target.title.value,
-				profilePic: evt.target.profilePic.value,
-				city: evt.target.city.value,
-				state: evt.target.state.value,
-				country: evt.target.country.value,
-			};
 			const dotter = await createDotter(data);
 			await Router.push("/dotter/[id]", `/dotter/${dotter.id}`);
 		} catch (error) {
@@ -26,7 +28,7 @@ const Draft: FC = () => {
 	return (
 		<Layout>
 			<div>
-				<form onSubmit={submitData}>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<h1 className="text-4xl mb-4">Create New Dotter</h1>
 
 					<label htmlFor="firstName">First Name</label>
@@ -38,6 +40,9 @@ const Draft: FC = () => {
 						placeholder="John"
 						required
 						autoFocus
+						{...register("firstName", {
+							required: true,
+						})}
 					/>
 
 					<label htmlFor="lastName">Last Name</label>
@@ -48,6 +53,9 @@ const Draft: FC = () => {
 						name="lastName"
 						placeholder="Doe"
 						required
+						{...register("lastName", {
+							required: true,
+						})}
 					/>
 
 					<label htmlFor="title">Title</label>
@@ -58,6 +66,9 @@ const Draft: FC = () => {
 						name="title"
 						placeholder="Software Engineer"
 						required
+						{...register("title", {
+							required: true,
+						})}
 					/>
 
 					<label htmlFor="profilePic">Profile Picture</label>
@@ -68,6 +79,9 @@ const Draft: FC = () => {
 						name="profilePic"
 						placeholder="https://"
 						required
+						{...register("profilePic", {
+							required: true,
+						})}
 					/>
 
 					<label htmlFor="city">City</label>
@@ -78,6 +92,9 @@ const Draft: FC = () => {
 						name="city"
 						placeholder="San Francisco"
 						required
+						{...register("city", {
+							required: true,
+						})}
 					/>
 
 					<label htmlFor="state">State</label>
@@ -87,6 +104,7 @@ const Draft: FC = () => {
 						id="state"
 						name="state"
 						placeholder="CA"
+						{...register("state")}
 					/>
 
 					<label htmlFor="country">Country</label>
@@ -97,6 +115,9 @@ const Draft: FC = () => {
 						name="country"
 						placeholder="USA"
 						required
+						{...register("country", {
+							required: true,
+						})}
 					/>
 
 					<input

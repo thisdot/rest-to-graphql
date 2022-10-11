@@ -27,7 +27,8 @@ export const getDotterById = async (id) => {
 export const updateDotterById = async (id, data) => {
 	await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters/${id}`, {
 		method: "PUT",
-		body: data,
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(data),
 	});
 };
 
