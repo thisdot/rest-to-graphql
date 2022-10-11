@@ -7,6 +7,7 @@
 		"lib": ["esnext"],
 		"esModuleInterop": true,
 		"paths": {
+			"@models/*": ["models/*"],
 			"@utils/*": ["utils/*"]
 		}
 	},

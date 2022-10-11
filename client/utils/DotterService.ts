@@ -1,6 +1,6 @@
 export const getDotters = async (page = 1, perPage = 8) => {
 	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}dotters?page=${page}&perPage=${perPage}`
+		`${process.env.NEXT_PUBLIC_API_URL}dotters?page=${page}&perPage=${perPage}&includeLocation=true`
 	);
 	const dottersConnection = await res.json();
 	return dottersConnection;
@@ -17,7 +17,9 @@ export const createDotter = async (data) => {
 };
 
 export const getDotterById = async (id) => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters/${id}`);
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_API_URL}dotters/${id}?includeLocation=true`
+	);
 	const dotter = await res.json();
 	return dotter;
 };
