@@ -125,10 +125,10 @@ export type QueryLocationsArgs = {
 };
 
 export type UpdateDotterInput = {
-  firstName?: InputMaybe<Scalars['String']>;
-  lastName?: InputMaybe<Scalars['String']>;
-  profilePic?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  profilePic: Scalars['String'];
+  title: Scalars['String'];
 };
 
 

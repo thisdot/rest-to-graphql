@@ -17,7 +17,7 @@ export const create = async ({
 	title: string;
 	profilePic: string;
 	city: string;
-	state: string;
+	state?: string;
 	country: string;
 }): Promise<Dotter> => {
 	// TODO: add validations for passed arguments

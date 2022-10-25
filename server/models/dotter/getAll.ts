@@ -10,7 +10,7 @@ export const getAll = async ({
 }: {
 	page: number;
 	perPage: number;
-	includeLocation: boolean;
+	includeLocation?: boolean;
 }): Promise<{
 	dotters: Dotter[];
 	count: number;

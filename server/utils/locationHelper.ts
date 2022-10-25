@@ -2,7 +2,7 @@ import { Prisma } from "@prisma/client";
 
 export const generateConnectOrCreate = (
 	city: string,
-	state: string,
+	state: string | undefined,
 	country: string
 ): Prisma.LocationCreateOrConnectWithoutDottersInput => {
 	if (!state) {

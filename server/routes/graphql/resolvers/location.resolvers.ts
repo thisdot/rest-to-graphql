@@ -1,8 +1,6 @@
+import { get, getAll } from "@models/location";
 import { getByLocation } from "@models/dotter";
-import fetch from "node-fetch";
-import { Location, Pagination, Resolvers } from "types/graphql";
-
-const { REST_ENDPOINT_URL } = process.env;
+import { Resolvers } from "types/graphql";
 
 export const LocationResolvers: Resolvers = {
 	Location: {
@@ -13,26 +11,26 @@ export const LocationResolvers: Resolvers = {
 	},
 	Query: {
 		locations: async (_, { pagination }) => {
-			const { page = 1, perPage = 8 } = pagination || {};
-
-			const res = await fetch(
-				`${REST_ENDPOINT_URL}locations?page=${page}&perPage=${perPage}`
-			);
-			const { data, pageInfo } = (await res.json()) as {
-				data: [Location];
-				pageInfo: Pagination;
-			};
+			const page = pagination?.page ?? 1;
+			const perPage = pagination?.page ?? 8;
+			const { locations, count } = await getAll({
+				perPage,
+				page,
+			});
 
 			return {
-				nodes: data,
-				pagination: pageInfo,
+				nodes: locations,
+				pagination: {
+					page,
+					perPage,
+					total: count,
+					totalPages: Math.ceil(count / perPage),
+				},
 			};
 		},
 		location: async (_, { id }) => {
-			const res = await fetch(`${REST_ENDPOINT_URL}locations/${id}`);
-			const data = (await res.json()) as Location;
-
-			return data;
+			const location = await get(Number(id));
+			return location;
 		},
 	},
 };
