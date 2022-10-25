@@ -24,7 +24,7 @@ export const Dotter: FC<{ dotter: DotterProps; hideLocation?: boolean }> = ({
 		<div className="w-full rounded overflow-hidden shadow-lg bg-slate-100">
 			<img
 				className="w-auto h-60 lg:h-72 m-auto"
-				src={`${profilePic}?w=400&h=400`}
+				src={`${profilePic}`}
 				alt={`${firstName} ${lastName} profile picture`}
 			/>
 			<div className="bg-white px-6 py-4">
