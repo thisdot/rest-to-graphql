@@ -14,7 +14,7 @@ export const DotterResolvers: Resolvers = {
 	Query: {
 		dotters: async (_, { pagination }) => {
 			const page = pagination?.page ?? 1;
-			const perPage = pagination?.page ?? 8;
+			const perPage = pagination?.perPage ?? 8;
 			const { dotters, count } = await getAll({
 				perPage,
 				page,
