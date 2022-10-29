@@ -1,12 +1,22 @@
 import { get, getAll } from "@models/location";
-import { getByLocation } from "@models/dotter";
+import { countByLocation, getByLocation } from "@models/dotter";
 import { Resolvers } from "types/graphql";
 
 export const LocationResolvers: Resolvers = {
 	Location: {
+		displayName: async ({ city, state, country }) => {
+			if (state) {
+				return `${city}, ${state}, ${country}`;
+			}
+
+			return `${city}, ${country}`;
+		},
 		dotters: async ({ id }) => {
 			const dotters = await getByLocation(Number(id));
 			return dotters;
+		},
+		dotterCount: async ({ id }) => {
+			return countByLocation(Number(id));
 		},
 	},
 	Query: {
