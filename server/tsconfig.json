@@ -1,12 +1,15 @@
 {
 	"compilerOptions": {
 		"baseUrl": ".",
+		"target": "es2020",
+		"moduleResolution": "NodeNext",
 		"sourceMap": true,
 		"outDir": "dist",
 		"strict": true,
 		"lib": ["esnext"],
 		"esModuleInterop": true,
 		"paths": {
+			"@dataSources/*": ["data_sources/*"],
 			"@models/*": ["models/*"],
 			"@utils/*": ["utils/*"]
 		}
