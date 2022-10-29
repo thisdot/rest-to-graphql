@@ -1,4 +1,3 @@
-import { getLocationName } from "@utils/getLocationName";
 import { FC } from "react";
 
 export type DotterProps = {
@@ -9,9 +8,7 @@ export type DotterProps = {
 	profilePic: string;
 	location?: {
 		id: number;
-		city: string;
-		state: string;
-		country: string;
+		displayName: string;
 	};
 };
 
@@ -33,7 +30,7 @@ export const Dotter: FC<{ dotter: DotterProps; hideLocation?: boolean }> = ({
 				</div>
 				<p className="text-gray-700 text-lg">{title}</p>
 				{!hideLocation && (
-					<p className="text-gray-700 text-sm">{getLocationName(location)}</p>
+					<p className="text-gray-700 text-sm">{location.displayName}</p>
 				)}
 			</div>
 		</div>

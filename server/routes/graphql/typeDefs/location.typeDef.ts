@@ -12,7 +12,9 @@ export const LocationTypeDef = gql`
 		city: String
 		state: String
 		country: String
+		displayName: String
 		dotters: [Dotter]
+		dotterCount: Int
 	}
 
 	type LocationConnection {
