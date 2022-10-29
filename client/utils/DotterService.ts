@@ -1,39 +1,123 @@
+import { request, gql } from "graphql-request";
+
+const GRAPHQL_ENDPOINT = `${process.env.NEXT_PUBLIC_API_URL}graphql`;
+
 export const getDotters = async (page = 1, perPage = 8) => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}dotters?page=${page}&perPage=${perPage}&includeLocation=true`
-	);
-	const dottersConnection = await res.json();
-	return dottersConnection;
+	const operation = gql`
+		query DottersQuery($pagination: PaginationInput) {
+			dotters(pagination: $pagination) {
+				nodes {
+					id
+					firstName
+					lastName
+					title
+					profilePic
+					location {
+						city
+						state
+						country
+					}
+				}
+				pagination {
+					page
+					totalPages
+				}
+			}
+		}
+	`;
+	const { dotters } = await request(GRAPHQL_ENDPOINT, operation, {
+		pagination: {
+			page,
+			perPage,
+		},
+	});
+
+	return dotters;
 };
 
 export const createDotter = async (data) => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters`, {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(data),
-	});
-	const newDotter = await res.json();
+	const operation = gql`
+		mutation CreateDotterMutation($data: CreateDotterInput!) {
+			createDotter(data: $data) {
+				id
+			}
+		}
+	`;
+
+	const { createDotter: newDotter } = await request(
+		GRAPHQL_ENDPOINT,
+		operation,
+		{
+			data: {
+				firstName: data.firstName,
+				lastName: data.lastName,
+				title: data.title,
+				profilePic: data.profilePic,
+				location: {
+					city: data.city,
+					state: data.state,
+					country: data.country,
+				},
+			},
+		}
+	);
+
 	return newDotter;
 };
 
 export const getDotterById = async (id) => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}dotters/${id}?includeLocation=true`
-	);
-	const dotter = await res.json();
+	const operation = gql`
+		query DotterQuery($id: ID!) {
+			dotter(id: $id) {
+				id
+				firstName
+				lastName
+				title
+				profilePic
+				location {
+					city
+					state
+					country
+				}
+			}
+		}
+	`;
+	const { dotter } = await request(GRAPHQL_ENDPOINT, operation, {
+		id,
+	});
 	return dotter;
 };
 
 export const updateDotterById = async (id, data) => {
-	await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters/${id}`, {
-		method: "PUT",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(data),
+	const operation = gql`
+		mutation UpdateDotterMutation($id: ID!, $data: UpdateDotterInput!) {
+			updateDotter(id: $id, data: $data) {
+				id
+			}
+		}
+	`;
+
+	await request(GRAPHQL_ENDPOINT, operation, {
+		id,
+		data: {
+			firstName: data.firstName,
+			lastName: data.lastName,
+			title: data.title,
+			profilePic: data.profilePic,
+		},
 	});
 };
 
 export const deleteDotterById = async (id) => {
-	await fetch(`${process.env.NEXT_PUBLIC_API_URL}dotters/${id}`, {
-		method: "DELETE",
+	const operation = gql`
+		mutation DotterMutation($id: ID!) {
+			deleteDotter(id: $id) {
+				id
+			}
+		}
+	`;
+
+	await request(GRAPHQL_ENDPOINT, operation, {
+		id,
 	});
 };
