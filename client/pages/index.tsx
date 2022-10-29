@@ -64,8 +64,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const dottersConnection = await getDotters(Number(context.query.page ?? 1));
 	return {
 		props: {
-			dotters: dottersConnection.data,
-			pageInfo: dottersConnection.pageInfo,
+			dotters: dottersConnection.nodes,
+			pageInfo: dottersConnection.pagination,
 		},
 	};
 };
