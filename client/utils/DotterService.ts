@@ -13,9 +13,8 @@ export const getDotters = async (page = 1, perPage = 8) => {
 					title
 					profilePic
 					location {
-						city
-						state
-						country
+						id
+						displayName
 					}
 				}
 				pagination {
@@ -75,9 +74,8 @@ export const getDotterById = async (id) => {
 				title
 				profilePic
 				location {
-					city
-					state
-					country
+					id
+					displayName
 				}
 			}
 		}

@@ -1,17 +1,13 @@
 import React from "react";
 import { GetServerSideProps } from "next";
 import Layout from "@components/Layout";
-import { DotterProps } from "@components/Dotter";
 import { getLocations } from "@utils/LocationService";
-import { getLocationName } from "@utils/getLocationName";
 
 type Props = {
 	locations: {
 		id: number;
-		city: string;
-		state: string;
-		country: string;
-		dotters: DotterProps[];
+		displayName: string;
+		dotterCount: number;
 	}[];
 };
 
@@ -26,7 +22,7 @@ const LocationsIndex: React.FC<Props> = (props) => {
 						key={location.id}
 						className="w-full"
 					>
-						{getLocationName(location)} - {location.dotters.length}
+						{location.displayName} - {location.dotterCount}
 					</a>
 				))}
 			</div>

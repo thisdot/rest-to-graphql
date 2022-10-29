@@ -8,12 +8,8 @@ export const getLocations = async () => {
 			locations {
 				nodes {
 					id
-					city
-					state
-					country
-					dotters {
-						id
-					}
+					displayName
+					dotterCount
 				}
 			}
 		}
@@ -28,9 +24,7 @@ export const getLocationById = async (id) => {
 		query LocationQuery($id: ID!) {
 			location(id: $id) {
 				id
-				city
-				state
-				country
+				displayName
 				dotters {
 					id
 					firstName
