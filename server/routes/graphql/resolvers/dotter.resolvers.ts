@@ -1,44 +1,35 @@
-import fetch from "node-fetch";
-import { Dotter, Location, Pagination, Resolvers } from "types/graphql";
-
-const { REST_ENDPOINT_URL } = process.env;
+import { Dotter, Resolvers } from "types/graphql";
 
 type RealDotter = Dotter & { locationId?: Number };
 
 export const DotterResolvers: Resolvers = {
 	Dotter: {
-		location: async ({ locationId }: RealDotter) => {
-			const res = await fetch(`${REST_ENDPOINT_URL}locations/${locationId}`);
-			const data = (await res.json()) as Location;
-			return data;
+		location: async ({ locationId }: RealDotter, _, { dataSources }) => {
+			const location = await dataSources.locationsApi.getLocation(locationId);
+			return location;
 		},
 	},
 	Query: {
-		dotters: async (_, { pagination }) => {
+		dotters: async (_, { pagination }, { dataSources }) => {
 			const { page = 1, perPage = 8 } = pagination || {};
 
-			const res = await fetch(
-				`${REST_ENDPOINT_URL}dotters?page=${page}&perPage=${perPage}`
+			const { data, pageInfo } = await dataSources.dottersApi.getDotters(
+				page,
+				perPage
 			);
-			const { data, pageInfo } = (await res.json()) as {
-				data: [Dotter];
-				pageInfo: Pagination;
-			};
 
 			return {
 				nodes: data,
 				pagination: pageInfo,
 			};
 		},
-		dotter: async (_, { id }) => {
-			const res = await fetch(`${REST_ENDPOINT_URL}dotters/${id}`);
-			const data = (await res.json()) as Dotter;
-
-			return data;
+		dotter: async (_, { id }, { dataSources }) => {
+			const dotter = await dataSources.dottersApi.getDotter(id);
+			return dotter;
 		},
 	},
 	Mutation: {
-		createDotter: async (_, { data }) => {
+		createDotter: async (_, { data }, { dataSources }) => {
 			const { firstName, lastName, title, profilePic, location } = data;
 			const remappedData = {
 				firstName,
@@ -47,28 +38,16 @@ export const DotterResolvers: Resolvers = {
 				profilePic,
 				...location,
 			};
-			const res = await fetch(`${REST_ENDPOINT_URL}dotters`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(remappedData),
-			});
-			const newDotter = (await res.json()) as Dotter;
+			const newDotter = await dataSources.dottersApi.createDotter(remappedData);
+
 			return newDotter;
 		},
-		updateDotter: async (_, { id, data }) => {
-			const res = await fetch(`${REST_ENDPOINT_URL}dotters/${id}`, {
-				method: "PUT",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(data),
-			});
-			const updatedDotter = (await res.json()) as Dotter;
+		updateDotter: async (_, { id, data }, { dataSources }) => {
+			const updatedDotter = await dataSources.dottersApi.updateDotter(id, data);
 			return updatedDotter;
 		},
-		deleteDotter: async (_, { id }) => {
-			const res = await fetch(`${REST_ENDPOINT_URL}dotters/${id}`, {
-				method: "DELETE",
-			});
-			const deletedDotter = (await res.json()) as Dotter;
+		deleteDotter: async (_, { id }, { dataSources }) => {
+			const deletedDotter = await dataSources.dottersApi.deleteDotter(id);
 			return deletedDotter;
 		},
 	},
