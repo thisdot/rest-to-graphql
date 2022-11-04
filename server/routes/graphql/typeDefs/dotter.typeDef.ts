@@ -10,10 +10,10 @@ export const DotterTypeDef = gql`
 	}
 
 	input UpdateDotterInput {
-		firstName: String
-		lastName: String
-		title: String
-		profilePic: String
+		firstName: String!
+		lastName: String!
+		title: String!
+		profilePic: String!
 	}
 
 	type Dotter {
