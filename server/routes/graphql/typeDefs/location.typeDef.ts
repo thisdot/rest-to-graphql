@@ -9,9 +9,10 @@ export const LocationTypeDef = gql`
 
 	type Location {
 		id: ID!
-		city: String
-		state: String
-		country: String
+		city: String @deprecated(reason: "Use displayName instead")
+		state: String @deprecated(reason: "Use displayName instead")
+		country: String @deprecated(reason: "Use displayName instead")
+		displayName: String
 		dotters: [Dotter]
 	}
 

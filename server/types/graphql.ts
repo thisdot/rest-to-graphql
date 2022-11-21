@@ -46,10 +46,14 @@ export type DotterConnection = {
 
 export type Location = {
   __typename?: 'Location';
+  /** @deprecated Use displayName instead */
   city?: Maybe<Scalars['String']>;
+  /** @deprecated Use displayName instead */
   country?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
   dotters?: Maybe<Array<Maybe<Dotter>>>;
   id: Scalars['ID'];
+  /** @deprecated Use displayName instead */
   state?: Maybe<Scalars['String']>;
 };
 
@@ -255,6 +259,7 @@ export type DotterConnectionResolvers<ContextType = any, ParentType extends Reso
 export type LocationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Location'] = ResolversParentTypes['Location']> = {
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  displayName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   dotters?: Resolver<Maybe<Array<Maybe<ResolversTypes['Dotter']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

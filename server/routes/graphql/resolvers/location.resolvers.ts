@@ -8,6 +8,13 @@ export const LocationResolvers: Resolvers = {
 			const dotters = await getByLocation(Number(id));
 			return dotters;
 		},
+		displayName: async ({ city, state, country }) => {
+			if (state) {
+				return `${city}, ${state}, ${country}`;
+			}
+
+			return `${city}, ${country}`;
+		},
 	},
 	Query: {
 		locations: async (_, { pagination }) => {
