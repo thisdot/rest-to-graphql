@@ -9,7 +9,7 @@ export const create = async ({
 	title,
 	profilePic,
 	city,
-	state = null,
+	state,
 	country,
 }: {
 	firstName: string;
@@ -17,7 +17,7 @@ export const create = async ({
 	title: string;
 	profilePic: string;
 	city: string;
-	state: string | null;
+	state?: string;
 	country: string;
 }): Promise<Dotter> => {
 	// TODO: add validations for passed arguments
