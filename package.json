@@ -6,11 +6,12 @@
 		"./apps/*"
 	],
 	"scripts": {
+		"start": "ntl",
 		"dev": "run-p dev:*",
 		"dev:client": "npm run dev --workspace=apps/client",
 		"dev:server": "npm run dev --workspace=apps/server",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"prisma:migrate": "npx -w apps/server prisma migrate dev"
+		"prisma:reset": "npx -w apps/server prisma migrate reset"
 	},
 	"repository": {
 		"type": "git",
@@ -28,6 +29,7 @@
 	},
 	"homepage": "https://github.com/thisdot/rest-to-graphql#readme",
 	"devDependencies": {
-		"npm-run-all": "^4.1.5"
+		"npm-run-all": "^4.1.5",
+		"ntl": "^5.1.0"
 	}
 }

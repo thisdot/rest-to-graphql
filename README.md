@@ -3,8 +3,7 @@
 ## Prerequisites
 
 - Node v16+
-- yarn
-- Docker
+- npm v7+
 
 ## Getting Started
 
@@ -19,50 +18,32 @@ Before continuing, run `npm install` in both directories:
 npm install
 ```
 
-Once complete, you'll need to run the docker container and initialize the database.
-
-### Docker Setup
-
-To setup the PostgresQL image:
-
-```bash
-docker compose up -d
-```
-
-To teardown the database:
-
-```bash
-docker compose down
-```
-
-To start and restart the docker image:
-
-```bash
-docker compose start
-
-docker compose stop
-```
-
 ### Initialize the Database
 
 The following command will initialize the database, create the new tables, and seed the data. When asked for a name call it anything you'd like for instance, "init seed"
 
 ```bash
-npm run prisma:migrate
+npm run prisma:reset
 ```
+
+### Copy `/apps/client/.env.sample` -> `/apps/client/.env`
 
 ### Run the server
 
 ```bash
-cd server
-yarn dev
+npm run dev:server
 ```
 
 ### Run the client
 
 ```bash
-cd client
-yarn dev
+npm run dev:client
+```
+
+### Run both for easy development
+
+```bash
+npm run dev
 ```
 
 ## Migration Steps
