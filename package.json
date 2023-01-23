@@ -1,0 +1,33 @@
+{
+	"name": "rest-to-graphql",
+	"version": "1.0.0",
+	"description": "A REST api to GraphQL workshop",
+	"workspaces": [
+		"./apps/*"
+	],
+	"scripts": {
+		"dev": "run-p dev:*",
+		"dev:client": "npm run dev --workspace=apps/client",
+		"dev:server": "npm run dev --workspace=apps/server",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prisma:migrate": "npx -w apps/server prisma migrate dev"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thisdot/rest-to-graphql.git"
+	},
+	"keywords": [
+		"REST",
+		"GraphQL",
+		"workshop"
+	],
+	"author": "Jesse Tomchak, Dustin Goodman",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/thisdot/rest-to-graphql/issues"
+	},
+	"homepage": "https://github.com/thisdot/rest-to-graphql#readme",
+	"devDependencies": {
+		"npm-run-all": "^4.1.5"
+	}
+}
