@@ -8,15 +8,15 @@
 
 ## Getting Started
 
-There are 2 project folders in this repo:
+There are 2 project folders in this repo under 'apps':
 
 - server: Express.js API
 - client: Next.js website
 
-Before continuing, run `yarn` in both directories:
+Before continuing, run `npm install` in both directories:
 
 ```bash
-cd server && yarn && cd ../client && yarn && cd ..
+npm install
 ```
 
 Once complete, you'll need to run the docker container and initialize the database.
@@ -45,11 +45,10 @@ docker compose stop
 
 ### Initialize the Database
 
-The following command will initialize the database, create the new tables, and seed the data.
+The following command will initialize the database, create the new tables, and seed the data. When asked for a name call it anything you'd like for instance, "init seed"
 
 ```bash
-cd server
-npx prisma migrate dev --name init
+npm run prisma:migrate
 ```
 
 ### Run the server
