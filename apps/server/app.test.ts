@@ -8,10 +8,7 @@ describe("GET /healthcheck", () => {
 			.get("/healthcheck")
 			.expect("Content-Type", /json/)
 			.expect(200);
-	});
 
-	// it("returns bad request if firstname is missing", async () => {
-	// 	const res = await request(app).post("/register").send();
-	// 	expect(res.statusCode).toEqual(201);
-	// });
+		expect(res.body).toEqual({ message: "Hello World" });
+	});
 });
