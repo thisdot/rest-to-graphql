@@ -1,17 +1,28 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"baseUrl": ".",
-		"sourceMap": true,
-		"outDir": "dist",
-		"strict": true,
-		"lib": ["esnext"],
+		"target": "es2017",
+		"types": ["node", "jest"],
+		"allowJs": true,
+		"skipLibCheck": true,
 		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noFallthroughCasesInSwitch": true,
+		"lib": ["esnext"],
 		"paths": {
 			"@models/*": ["models/*"],
 			"@utils/*": ["utils/*"]
 		}
 	},
+	"compileOnSave": true,
 	"ts-node": {
-		"require": ["tsconfig-paths/register"]
+		"transpileOnly": true,
+		"files": true
 	}
 }
