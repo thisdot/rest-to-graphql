@@ -2,7 +2,7 @@ import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const dotterData: Prisma.DotterCreateInput[] = [
+export const dotterData: Prisma.DotterCreateInput[] = [
 	{
 		firstName: "Tracy",
 		lastName: "Lee",
@@ -334,7 +334,7 @@ async function seedDotterData() {
 			`Create record ${dotter.id} for ${dotter.firstName} ${dotter.lastName}`
 		);
 	}
-	console.log("Finished seeidng Dotter data!");
+	console.log("Finished seeding Dotter data!");
 }
 
 seedDotterData()

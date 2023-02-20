@@ -7,6 +7,7 @@ const { compilerOptions } = require("./tsconfig");
 module.exports = {
 	preset: "ts-jest",
 	testEnvironment: "node",
+	setupFilesAfterEnv: [],
 	moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
 		prefix: "<rootDir>/",
 	}),
