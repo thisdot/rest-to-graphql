@@ -5,6 +5,8 @@ import {
 	mockLocationPerPage,
 	mockLocationSecondPage,
 	mockWithDotterLocation,
+	mockLocationById,
+	mockLocationByIdWithDotter,
 } from "../__mocks__/mockLocation";
 
 // group test using describe
@@ -59,7 +61,9 @@ describe("Locations API endpoint:", () => {
 				.expect("Content-Type", /text\/html; charset=utf-8/)
 				.expect(400);
 
-			expect(res.body).toEqual({});
+			expect(res.text).toMatch(
+				/Invalid value for page. Expected number, got NaN/
+			);
 		});
 		it("returns 404 from perPage variable is invalid", async () => {
 			const res = await request(app)
@@ -67,7 +71,44 @@ describe("Locations API endpoint:", () => {
 				.expect("Content-Type", /text\/html; charset=utf-8/)
 				.expect(400);
 
-			expect(res.body).toEqual({});
+			expect(res.text).toMatch(
+				/Invalid value for perPage. Expected number, got NaN/
+			);
+		});
+	});
+});
+
+describe("Locations API endpoint with ID", () => {
+	describe("GET / for locations with id", () => {
+		it("returns specific location", async () => {
+			const res = await request(app)
+				.get("/locations/3")
+				.expect("Content-Type", /json/)
+				.expect(200);
+
+			expect(res.body).toEqual(mockLocationById);
+		});
+	});
+	describe("GET / for locations with id with dotter info", () => {
+		it("returns specific location with the dotter info", async () => {
+			const res = await request(app)
+				.get("/locations/3?includeDotters=true")
+				.expect("Content-Type", /json/)
+				.expect(200);
+
+			expect(res.body).toEqual(mockLocationByIdWithDotter);
+		});
+	});
+});
+
+describe("Locations API for endpoint with ID invalid", () => {
+	describe("GET / for locations with id", () => {
+		it("returns a 404, no locations exists, not found", async () => {
+			const res = await request(app)
+				.get("/locations/33")
+				.expect("Content-Type", /text\/html; charset=utf-8/)
+				.expect(404);
+			expect(res.text).toMatch(/Location not found/);
 		});
 	});
 });
