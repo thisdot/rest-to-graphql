@@ -4,7 +4,8 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "nodemon server.ts",
-		"test": "jest"
+		"test": "dotenv -e .env.test jest -i",
+		"prisma:test": "dotenv -e .env.test -- npx prisma migrate reset --force"
 	},
 	"dependencies": {
 		"@jest/types": "^29.3.1",
