@@ -422,3 +422,40 @@ export const mockLocationPerPage = {
 	data: defaultLocationData,
 	pageInfo: { page: 1, perPage: 3, total: 13, totalPages: 5 },
 };
+
+/**
+ * Specific location by id
+ */
+export const mockLocationById = {
+	id: 3,
+	city: "Durham",
+	state: "NC",
+	country: "USA",
+	createdAt: "2023-02-20T20:48:58.109Z",
+	updatedAt: "2023-02-20T20:48:58.109Z",
+};
+
+/**
+ * Specific location by id with dotter info
+ */
+export const mockLocationByIdWithDotter = {
+	id: 3,
+	city: "Durham",
+	state: "NC",
+	country: "USA",
+	createdAt: "2023-02-20T20:48:58.109Z",
+	updatedAt: "2023-02-20T20:48:58.109Z",
+	dotters: [
+		{
+			id: 4,
+			firstName: "Rob",
+			lastName: "Ocel",
+			title: "Software Architect and Engineering Lead",
+			profilePic:
+				"https://images.ctfassets.net/zojzzdop0fzx/6cERKI4uJPI8NaHejLcCDf/e500e34d5864b824e55ae277b942cf98/test.png",
+			locationId: 3,
+			createdAt: "2023-02-20T21:23:48.119Z",
+			updatedAt: "2023-02-20T21:23:48.119Z",
+		},
+	],
+};
