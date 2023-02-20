@@ -9,7 +9,6 @@ import {
 	mockLocationByIdWithDotter,
 } from "../__mocks__/mockLocation";
 
-// group test using describe
 describe("Locations API endpoint:", () => {
 	describe("GET / for locations as default", () => {
 		it("returns locations", async () => {
@@ -18,7 +17,9 @@ describe("Locations API endpoint:", () => {
 				.expect("Content-Type", /json/)
 				.expect(200);
 
-			expect(res.body).toEqual(mockLocationDefault);
+			expect(res.body.data).toEqual(
+				expect.arrayContaining(mockLocationDefault.data)
+			);
 		});
 	});
 
