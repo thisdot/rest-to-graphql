@@ -222,3 +222,8 @@ export const mockNewDotter = () => ({
 	state: faker.address.stateAbbr(),
 	country: faker.address.country(),
 });
+
+/**
+ * New Dotter property
+ */
+export const mockNewDotterTitle = faker.name.jobTitle;

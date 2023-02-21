@@ -35,7 +35,6 @@ routes.get("/", async (req, res) => {
 });
 
 routes.post("/", async (req, res) => {
-	console.log(">>REQ", req.body);
 	const { firstName, lastName, title, profilePic, city, state, country } =
 		req.body;
 	const newDotter = await create({
@@ -87,8 +86,20 @@ routes.put("/:id", async (req, res) => {
 
 routes.delete("/:id", async (req, res) => {
 	const { id } = req.params;
-	const dotter = await destroy(Number(id));
-	res.json(dotter);
+	try {
+		const dotter = await destroy(Number(id));
+		if (!dotter) {
+			res.status(404).send("Dotter not found.");
+			return;
+		}
+		res.json(dotter);
+	} catch (error) {
+		if (error instanceof ValidationError) {
+			res.status(400).send(error.message);
+			return;
+		}
+		res.status(500).send(error);
+	}
 });
 
 export default routes;
