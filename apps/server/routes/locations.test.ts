@@ -30,7 +30,14 @@ describe("Locations API endpoint:", () => {
 				.expect("Content-Type", /json/)
 				.expect(200);
 
-			expect(res.body).toEqual(mockLocationPerPage);
+			expect(res.body.pageInfo).toEqual(
+				expect.objectContaining(mockLocationPerPage.pageInfo)
+			);
+			// contains an array of locations of at least
+			// if not more than the seeded location data
+			expect(res.body.data).toEqual(
+				expect.arrayContaining(mockLocationPerPage.data)
+			);
 		});
 	});
 
@@ -41,7 +48,14 @@ describe("Locations API endpoint:", () => {
 				.expect("Content-Type", /json/)
 				.expect(200);
 
-			expect(res.body).toEqual(mockLocationSecondPage);
+			expect(res.body.pageInfo).toEqual(
+				expect.objectContaining(mockLocationSecondPage.pageInfo)
+			);
+			// contains an array of locations of at least
+			// if not more than the seeded location data
+			expect(res.body.data).toEqual(
+				expect.arrayContaining(mockLocationSecondPage.data)
+			);
 		});
 	});
 
@@ -51,7 +65,9 @@ describe("Locations API endpoint:", () => {
 				.get("/locations?includeDotters=true")
 				.expect("Content-Type", /json/)
 				.expect(200);
-			expect(res.body).toEqual(mockWithDotterLocation);
+			expect(res.body.data).toEqual(
+				expect.arrayContaining(mockWithDotterLocation.data)
+			);
 		});
 	});
 

@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker";
+
 const mockDotterDefaultData = [
 	{
 		id: 1,
@@ -198,3 +200,25 @@ export const mockDotterWithLocation = {
 	data: withLocationMockDotterData,
 	pageInfo: { page: 1, perPage: 6 },
 };
+
+/**
+ *
+ * @param id Query parameter from API request
+ * @returns Dotter found or undefined
+ */
+export const mockDotterById = (id: number) => {
+	return mockDotterDefaultData.find((member) => member.id === id);
+};
+
+/**
+ * create new mock dotter
+ */
+export const mockNewDotter = () => ({
+	firstName: faker.name.firstName(),
+	lastName: faker.name.lastName(),
+	title: faker.name.jobTitle(),
+	profilePic: faker.image.imageUrl(1234, 2345, "profile"),
+	city: faker.address.cityName(),
+	state: faker.address.stateAbbr(),
+	country: faker.address.country(),
+});

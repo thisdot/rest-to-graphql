@@ -412,7 +412,7 @@ export const mockWithDotterLocation = {
  */
 export const mockLocationSecondPage = {
 	data: defaultLocationData,
-	pageInfo: { page: 2, perPage: 6, total: 13, totalPages: 3 },
+	pageInfo: { page: 2, perPage: 6 },
 };
 
 /**
@@ -420,7 +420,7 @@ export const mockLocationSecondPage = {
  */
 export const mockLocationPerPage = {
 	data: defaultLocationData,
-	pageInfo: { page: 1, perPage: 3, total: 13, totalPages: 5 },
+	pageInfo: { page: 1, perPage: 3 },
 };
 
 /**

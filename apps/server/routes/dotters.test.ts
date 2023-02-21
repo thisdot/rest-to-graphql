@@ -4,6 +4,8 @@ import app from "./../app";
 import {
 	mockDotterDefault,
 	mockDotterWithLocation,
+	mockDotterById,
+	mockNewDotter,
 } from "../__mocks__/mockDotters";
 
 describe("Dotters API endpoint:", () => {
@@ -41,6 +43,36 @@ describe("Dotters API endpoint:", () => {
 			// contains an array of dotters of at least
 			// if not more than the seeded dotter data
 			expect(res.body.data).toEqual(expect.arrayContaining(data));
+		});
+	});
+
+	describe("GET /:id for dotters", () => {
+		it("returns dotter matching :id", async () => {
+			const dotterId = 5;
+			const res = await request(app)
+				.get(`/dotters/${dotterId}`)
+				.expect("Content-Type", /json/)
+				.expect(200);
+
+			// contains object data matching the dot member
+			// returned by specific id
+			expect(res.body).toEqual(
+				expect.objectContaining(mockDotterById(dotterId))
+			);
+		});
+	});
+
+	describe("POST / create new dotter", () => {
+		it("returns a newly created dotter", async () => {
+			// create dotter
+			const newDotter = mockNewDotter();
+			// post to endpoint
+			const res = await request(app)
+				.post(`/dotters`)
+				.send(newDotter)
+				.expect("Content-Type", /json/)
+				.expect(200);
+			console.log(res.body);
 		});
 	});
 });
