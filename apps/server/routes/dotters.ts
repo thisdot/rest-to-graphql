@@ -35,9 +35,9 @@ routes.get("/", async (req, res) => {
 });
 
 routes.post("/", async (req, res) => {
+	console.log(">>REQ", req.body);
 	const { firstName, lastName, title, profilePic, city, state, country } =
 		req.body;
-
 	const newDotter = await create({
 		firstName,
 		lastName,
