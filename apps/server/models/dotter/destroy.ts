@@ -8,11 +8,13 @@ export const destroy = async (id: number): Promise<Dotter | null> => {
 		throw new ValidationError("Invalid identifier");
 	}
 
-	const dotter = await prisma.dotter.delete({
-		where: {
-			id: Number(id),
-		},
-	});
-
-	return dotter;
+	try {
+		return await prisma.dotter.delete({
+			where: {
+				id: Number(id),
+			},
+		});
+	} catch (error) {
+		return null;
+	}
 };
