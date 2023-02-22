@@ -2,7 +2,10 @@ import { yoga } from "../../app";
 import { buildHTTPExecutor } from "@graphql-tools/executor-http";
 import { parse } from "graphql";
 
-import { mockLocationDefault } from "../../__mocks__/mockLocation";
+import {
+	mockLocationDefault,
+	mockLocationById,
+} from "../../__mocks__/mockLocation";
 
 function assertSingleValue<TValue extends object>(
 	value: TValue | AsyncIterable<TValue>
@@ -21,7 +24,7 @@ describe("GQL Location", () => {
 
 			const result = await executor({
 				document: parse(/* GraphQL */ `
-					query {
+					query AllLocations {
 						allLocations {
 							id
 							city
@@ -38,6 +41,31 @@ describe("GQL Location", () => {
 			expect(result.data?.allLocations).toEqual(
 				expect.arrayContaining(mockLocationDefault.data)
 			);
+		});
+	});
+	describe("Query location by ID", () => {
+		it("returns location matching ID", async () => {
+			const executor = buildHTTPExecutor({
+				fetch: yoga.fetch,
+			});
+
+			const result = await executor({
+				document: parse(/* GraphQL */ `
+					query findLocation {
+						findLocation(id: 3) {
+							id
+							state
+							city
+							country
+							createdAt
+							updatedAt
+						}
+					}
+				`),
+			});
+
+			assertSingleValue(result);
+			expect(result.data?.findLocation).toEqual(mockLocationById);
 		});
 	});
 });
