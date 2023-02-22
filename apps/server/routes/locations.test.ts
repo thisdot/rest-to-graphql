@@ -122,7 +122,7 @@ describe("Locations API for endpoint with ID invalid", () => {
 	describe("GET / for locations with id", () => {
 		it("returns a 404, no locations exists, not found", async () => {
 			const res = await request(app)
-				.get("/locations/33")
+				.get("/locations/99233")
 				.expect("Content-Type", /text\/html; charset=utf-8/)
 				.expect(404);
 			expect(res.text).toMatch(/Location not found/);
