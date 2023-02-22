@@ -14,9 +14,29 @@ export const locationResolvers = {
 				return locations;
 			} catch (err) {
 				if (err instanceof ValidationError) {
-					return Promise.reject(new GraphQLError("Wrong arguments"));
+					throw new GraphQLError(
+						`No locations found.`,
+						// error extensions
+						{
+							extensions: {
+								http: {
+									status: 400,
+								},
+							},
+						}
+					);
 				}
-				return Promise.reject(err);
+				throw new GraphQLError(
+					`${err}`,
+					// error extensions
+					{
+						extensions: {
+							http: {
+								status: 500,
+							},
+						},
+					}
+				);
 			}
 		},
 	},
