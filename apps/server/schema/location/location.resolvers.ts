@@ -39,5 +39,37 @@ export const locationResolvers = {
 				);
 			}
 		},
+		findLocation: async (_: any, { id }: { id: number }) => {
+			try {
+				const location = await get(id, {});
+
+				if (!location) {
+					throw new GraphQLError(
+						`No location by ${id} found.`,
+						// error extensions
+						{
+							extensions: {
+								http: {
+									status: 400,
+								},
+							},
+						}
+					);
+				}
+				return location;
+			} catch (err) {
+				throw new GraphQLError(
+					`${err}`,
+					// error extensions
+					{
+						extensions: {
+							http: {
+								status: 500,
+							},
+						},
+					}
+				);
+			}
+		},
 	},
 };

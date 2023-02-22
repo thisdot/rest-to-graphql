@@ -15,5 +15,7 @@ export const locationTypeDefs = gql`
 	type Query {
 		"A list of dotter locations"
 		allLocations: [Location!]
+		"Specific location by ID"
+		findLocation(id: Int!): Location
 	}
 `;
