@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { Dotter } from "@prisma/client";
 
 const mockDotterDefaultData = [
 	{
@@ -186,6 +187,107 @@ const withLocationMockDotterData = [
 	},
 ];
 
+const mockDotterDefaultDataGql = [
+	{
+		firstName: "Tracy",
+		lastName: "Lee",
+		location: {
+			state: "GA",
+		},
+	},
+	{
+		firstName: "Elliott",
+		lastName: "Fouts",
+		location: {
+			state: "GA",
+		},
+	},
+	{
+		firstName: "Wentao",
+		lastName: "Shu",
+		location: {
+			state: "CA",
+		},
+	},
+	{
+		firstName: "Rob",
+		lastName: "Ocel",
+		location: {
+			state: "NC",
+		},
+	},
+	{
+		firstName: "Sarah",
+		lastName: "Ronau",
+		location: {
+			state: "CA",
+		},
+	},
+	{
+		firstName: "Simone",
+		lastName: "Cuomo",
+		location: {
+			state: null,
+		},
+	},
+	{
+		firstName: "Jesse",
+		lastName: "Tomchak",
+		location: {
+			state: "AZ",
+		},
+	},
+	{
+		firstName: "Dustin",
+		lastName: "Goodman",
+		location: {
+			state: "LA",
+		},
+	},
+	{
+		firstName: "Linda",
+		lastName: "Thompson",
+		location: {
+			state: "TX",
+		},
+	},
+	{
+		firstName: "Morgan",
+		lastName: "Worrell",
+		location: {
+			state: "Ontario",
+		},
+	},
+	{
+		firstName: "Allan",
+		lastName: "Jeremy",
+		location: {
+			state: null,
+		},
+	},
+	{
+		firstName: "Jessica",
+		lastName: "Wilkins",
+		location: {
+			state: "CA",
+		},
+	},
+	{
+		firstName: "Nacho",
+		lastName: "Vazquez",
+		location: {
+			state: null,
+		},
+	},
+	{
+		firstName: "Jesus",
+		lastName: "Padron",
+		location: {
+			state: null,
+		},
+	},
+];
+
 /**
  * Default no query paramaters sent
  */
@@ -202,12 +304,30 @@ export const mockDotterWithLocation = {
 };
 
 /**
+ * Default All from GQL
+ */
+export const mockDotterDefaultGql = mockDotterDefaultDataGql;
+
+/**
  *
  * @param id Query parameter from API request
  * @returns Dotter found or undefined
  */
 export const mockDotterById = (id: number) => {
 	return mockDotterDefaultData.find((member) => member.id === id);
+};
+
+/**
+ * Wrapped in an array
+ * @param id Query parameter from API request
+ * @returns Dotter iterable of all found
+ */
+export const mockDotterByIdGql = (id: number) => {
+	//remove location bc we dont' return in in gql
+	const { locationId, ...dotter }: any = mockDotterDefaultData.find(
+		(member) => member.id === id
+	);
+	return [dotter];
 };
 
 /**

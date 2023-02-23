@@ -21,7 +21,6 @@ export const create = async ({
 	country: string;
 }): Promise<Dotter> => {
 	// TODO: add validations for passed arguments
-
 	const newDotter = await prisma.dotter.create({
 		data: {
 			firstName,
