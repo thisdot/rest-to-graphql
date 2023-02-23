@@ -17,5 +17,6 @@ export const dotterTypeDefs = gql`
 	}
 	type Query {
 		allDotters(skip: Int, take: Int): [Dotter]!
+		findDotter(id: Int, name: String): [Dotter]
 	}
 `;
