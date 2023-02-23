@@ -13,6 +13,7 @@ export const dotterTypeDefs = gql`
 		locationId: Int!
 		createdAt: Date!
 		updatedAt: Date!
+		location: Location!
 	}
 	type Query {
 		allDotters(skip: Int, take: Int): [Dotter]!
