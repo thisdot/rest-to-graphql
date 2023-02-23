@@ -6,7 +6,8 @@
 		"dev": "nodemon -e ts,js --exec ts-node -r tsconfig-paths/register  server.ts",
 		"test": "DOTENV_CONFIG_PATH=.env.test jest -i --coverage",
 		"test:watch": "DOTENV_CONFIG_PATH=.env.test jest -i --watch",
-		"prisma:test": "dotenv -e .env.test -- npx prisma migrate reset --force"
+		"prisma:test": "dotenv -e .env.test -- npx prisma migrate reset --force",
+		"prisma:dev": "dotenv -e .env.development -- npx prisma migrate reset --force"
 	},
 	"dependencies": {
 		"@jest/types": "^29.3.1",

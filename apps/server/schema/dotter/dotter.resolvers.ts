@@ -82,4 +82,23 @@ export const dotterResolvers = {
 			}
 		},
 	},
+	Mutation: {
+		createDotter: async (
+			parent: unknown,
+			args: {
+				dotter: {
+					firstName: string;
+					lastName: string;
+					title: string;
+					profilePic: string;
+					city: string;
+					state: string;
+					country: string;
+				};
+			}
+		) => {
+			const dotter = await create(args.dotter);
+			return dotter;
+		},
+	},
 };

@@ -31,7 +31,7 @@ export const getDotter = async ({
 }: {
 	id?: number;
 	name?: string;
-}): Promise<[Dotter & { location: Location }] | null> => {
+}) => {
 	// if id is provided and not a number
 	if (id && isNaN(id)) {
 		throw new ValidationError("Invalid identifier");

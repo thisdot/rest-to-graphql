@@ -15,8 +15,24 @@ export const dotterTypeDefs = gql`
 		updatedAt: Date!
 		location: Location!
 	}
+	"""
+	Input for new Dotter
+	"""
+	input CreateDotterInput {
+		firstName: String!
+		lastName: String!
+		title: String!
+		profilePic: String!
+		city: String!
+		state: String
+		country: String!
+	}
+
 	type Query {
 		allDotters(skip: Int, take: Int): [Dotter]!
 		findDotter(id: Int, name: String): [Dotter]
+	}
+	type Mutation {
+		createDotter(dotter: CreateDotterInput): Dotter
 	}
 `;
