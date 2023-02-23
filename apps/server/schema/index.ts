@@ -7,13 +7,19 @@ import { DateTypeDefinition } from "graphql-scalars";
  */
 import { healthcheckResolvers, healthcheckTypeDefs } from "./healthcheck";
 import { locationTypeDefs, locationResolvers } from "./location";
+import { dotterTypeDefs, dotterResolvers } from "./dotter";
 
 const typeDefs = mergeTypeDefs([
 	DateTypeDefinition,
 	healthcheckTypeDefs,
 	locationTypeDefs,
+	dotterTypeDefs,
 ]);
 
-const resolvers = mergeResolvers([healthcheckResolvers, locationResolvers]);
+const resolvers = mergeResolvers([
+	healthcheckResolvers,
+	locationResolvers,
+	dotterResolvers,
+]);
 
 export const schema = makeExecutableSchema({ typeDefs, resolvers });
