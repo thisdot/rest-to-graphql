@@ -42,10 +42,19 @@ export const getAll = async ({
 };
 
 // Want to type that
-export const getAllDotters = async ({ skip, take }): Promise<Dotter[]> => {
+export const getAllDotters = async ({
+	skip,
+	take,
+}: {
+	skip?: number;
+	take?: number;
+}): Promise<Dotter[]> => {
 	const dotters = await prisma.dotter.findMany({
 		skip: skip,
 		take: take,
+		include: {
+			location: true,
+		},
 	});
 	return dotters;
 };

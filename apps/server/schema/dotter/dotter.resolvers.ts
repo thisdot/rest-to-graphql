@@ -4,7 +4,10 @@ import { GraphQLError } from "graphql";
 
 export const dotterResolvers = {
 	Query: {
-		allDotters: async (_, { skip, take }: { skip: number; take: number }) => {
+		allDotters: async (
+			_: any,
+			{ skip, take }: { skip: number; take: number }
+		) => {
 			try {
 				const dotters = await getAllDotters({
 					skip,
