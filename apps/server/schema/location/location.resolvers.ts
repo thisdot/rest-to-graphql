@@ -1,6 +1,7 @@
 import { GraphQLError } from "graphql";
 import { getAll, get } from "@models/location";
 import { ValidationError } from "@utils/errors";
+
 export const locationResolvers = {
 	Query: {
 		allLocations: async () => {

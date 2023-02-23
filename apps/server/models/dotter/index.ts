@@ -1,4 +1,4 @@
-export { getAll } from "./getAll";
+export { getAll, getAllDotters } from "./getAll";
 export { create } from "./create";
 export { get } from "./get";
 export { update } from "./update";
