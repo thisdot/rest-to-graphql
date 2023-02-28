@@ -100,5 +100,23 @@ export const dotterResolvers = {
 			const dotter = await create(args.dotter);
 			return dotter;
 		},
+		updateDotter: async (
+			parent: unknown,
+			args: {
+				id: number;
+				dotter: {
+					firstName: string;
+					lastName: string;
+					title: string;
+					profilePic: string;
+					city: string;
+					state: string;
+					country: string;
+				};
+			}
+		) => {
+			const updatedDotter = await update(args.id, args.dotter);
+			return updatedDotter;
+		},
 	},
 };
