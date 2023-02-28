@@ -44,5 +44,6 @@ export const dotterTypeDefs = gql`
 	type Mutation {
 		createDotter(dotter: CreateDotterInput): Dotter
 		updateDotter(id: Int!, dotter: UpdateDotterInput): Dotter
+		deleteDotter(id: Int!): Dotter
 	}
 `;

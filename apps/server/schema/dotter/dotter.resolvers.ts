@@ -118,5 +118,9 @@ export const dotterResolvers = {
 			const updatedDotter = await update(args.id, args.dotter);
 			return updatedDotter;
 		},
+		deleteDotter: async (parent: unknown, args: { id: number }) => {
+			const removedDotter = await destroy(args.id);
+			return removedDotter;
+		},
 	},
 };
