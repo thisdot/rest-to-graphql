@@ -27,6 +27,15 @@ export const dotterTypeDefs = gql`
 		state: String
 		country: String!
 	}
+	"""
+	Input for updating Dotter
+	"""
+	input UpdateDotterInput {
+		firstName: String
+		lastName: String
+		title: String
+		profilePic: String
+	}
 
 	type Query {
 		allDotters(skip: Int, take: Int): [Dotter]!
@@ -34,5 +43,6 @@ export const dotterTypeDefs = gql`
 	}
 	type Mutation {
 		createDotter(dotter: CreateDotterInput): Dotter
+		updateDotter(id: Int!, dotter: UpdateDotterInput): Dotter
 	}
 `;
