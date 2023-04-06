@@ -28,6 +28,8 @@ npm run prisma:reset
 
 ### Copy `/apps/client/.env.sample` -> `/apps/client/.env`
 
+`cp apps/client/.env.sample apps/client/.env`
+
 ### Run the server
 
 ```bash
@@ -54,3 +56,30 @@ npm run dev
 4. Setup your choice for GraphQL client
 5. Update existing API calls with GraphQL calls
 6. 🚢
+
+## Testing
+
+The focus is on testing the CRUD actions on the server side of the application.
+
+```bash
+npm test
+```
+
+This will
+
+1. Execute Prisma Test _then_ Server Test
+1. Prisma Test is going to do a couple things
+   1. `dotenv -e .env.test -- npx prisma migrate reset --force`
+   1. setup a clean test.sqlite and seed it with data
+   1. run all migrations on it
+1. Then after Prisma Test is complete `jest test` from the server directory is executed
+
+## Working with Repo during workshop
+
+The repo is broken down by tags
+
+1. `git checkout tags/v1.0 -b v1.0-branch` Is the inital project with tested REST api.
+   ...
+1. `git checkout tags/v2.0 -b v2.0-branch` Is the final, finished project with GRAPHQL implemented along side the REST API
+
+TODO: Repo needs to be progressivly enhanced from v1.0 -> v2.0 for each moudle adding in the code and tests along with objectives to cover from the instructor docs. Starting with [Commit](https://github.com/thisdot/rest-to-graphql/commits/main) cc783d701147d63a996c0f03eda48d9e2931797d is where gql deps are added and then work up the commits, and generate a tag `v1.1` before moving onto the next modlue. (at least that was the general plan)
